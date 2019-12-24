@@ -21,7 +21,7 @@ class Player {
 		Board* getBoard();
 	public:
 		// member methods
-		virtual Move promptMove(bool);
+		virtual Move promptMove();
 		
 		// public accessor methods
 		bool getColor();

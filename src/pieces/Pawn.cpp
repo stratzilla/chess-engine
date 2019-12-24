@@ -19,8 +19,8 @@ Pawn::Pawn(bool c) {
  * copy constructor
  * @return - a copy of this object
  */
-std::auto_ptr<Piece> Pawn::clone() const {
-	return std::auto_ptr<Piece>(new Pawn(*this));
+std::shared_ptr<Piece> Pawn::clone() const {
+	return std::shared_ptr<Piece>(new Pawn(*this));
 }
 
 /**

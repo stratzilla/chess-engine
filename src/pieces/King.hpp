@@ -16,12 +16,10 @@ class King : public Piece {
 		const static unsigned int MAX_MOVE = 1;
 		
 		// private member methods
-		void removeIllegalMoves(Board*, std::vector<Move>&);
 		bool checkSurroundingKings(Board*, Move);
-		bool wouldBeInCheck(Board*, Move);
 	public:
 		King(bool); // constructor
-		std::auto_ptr<Piece> clone() const; // copy constructor
+		std::shared_ptr<Piece> clone() const; // copy constructor
 		
 		// member methods
 		std::vector<Move> getMoves(Board*, unsigned int, unsigned int);

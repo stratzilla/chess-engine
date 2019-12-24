@@ -17,7 +17,7 @@ void printHelp() {
 	std::cout << "  2. Human vs. Computer\n";
 	std::cout << "  3. Computer vs. Computer\n";
 	std::cout << " <arg2> - Depth for Tree Search\n";
-	std::cout << "  Some integer value >0\n\n";
+	std::cout << "  - some integer value >0\n\n";
 	
 	std::cout << "Or three arguments:\n";
 	std::cout << " <arg1> - Type of Game\n";

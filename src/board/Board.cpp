@@ -290,34 +290,6 @@ std::vector<Move> Board::getAllNonKingMoves(bool c) {
 }
 
 /**
- * method to find all paths possible
- * @param c - the color to look for
- * @return - a list of moves for player
- */
-std::vector<Move> Board::getAllPaths(bool c) {
-	std::vector<Move> pathList; // master path list
-	for (unsigned int i = 0; i < COLS; i++) {
-		for (unsigned int j = 0; j < ROWS; j++) {
-			// short circuit in case non-occupied tile or wrong color
-			if (!(*this)(j, i) || (*this)(j, i).getPiece().getColor() == c) { continue; }
-			// paths are not available to kings
-			if ((*this)(j, i).getPiece().getType() == ((c) ? 'k' : 'K')) { continue; }
-			// nor knights
-			if ((*this)(j, i).getPiece().getType() == ((c) ? 'n' : 'N')) { continue; }
-			// nor pawns
-			if ((*this)(j, i).getPiece().getType() == ((c) ? 'p' : 'P')) { continue; }
-			// collect paths from tiled piece
-			std::vector<Move> paths = (*this)(j, i).getPiece().getPaths(this, j, i);
-			for (unsigned int k = 0; k < paths.size(); k++) {
-				// append those paths to the master list
-				pathList.push_back(paths[k]);
-			}
-		}
-	}
-	return pathList;
-}
-
-/**
  * method to count the piece values of all pieces
  * @param c - the color to check pieces for values
  * @return - the total value of those colored pieces

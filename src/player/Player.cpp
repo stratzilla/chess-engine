@@ -9,7 +9,7 @@
  * default behavior implicitly overriden by derived classes
  * in other words, never used
  */
-Move Player::promptMove(bool c) {
+Move Player::promptMove() {
 	return Move(0, 0, 0, 0);
 }
 

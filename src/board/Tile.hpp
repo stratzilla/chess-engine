@@ -8,7 +8,7 @@
  */
 class Tile {
 	private:
-		std::auto_ptr<Piece> occupant; // the occupying piece
+		std::shared_ptr<Piece> occupant; // the occupying piece
 	public:
 		Tile(); // default constructor
 		Tile(Piece* p); // parameterized constructor

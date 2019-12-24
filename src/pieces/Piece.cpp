@@ -17,26 +17,6 @@ bool Piece::checkInBounds(unsigned int c, unsigned int r) {
 	return (r < ROWS) && (c < COLS); 
 }
 
-/**
- * method for getting moves
- * default behavior implicitly overriden by derived classes
- * in other words, never used
- */
-std::vector<Move> Piece::getMoves(Board* b, unsigned int c, unsigned int r) {
-	std::vector<Move> vec;
-	return vec;
-}
-
-/**
- * method for getting paths
- * default behavior implicitly overriden by derived classes
- * in other words, never used
- */
-std::vector<Move> Piece::getPaths(Board* b, unsigned int c, unsigned int r) {
-	std::vector<Move> vec;
-	return vec;
-}
-
 // accessor methods
 bool Piece::getMoved() { return hasMoved; }
 bool Piece::getColor() { return color; }

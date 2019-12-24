@@ -14,12 +14,11 @@ Human::Human(bool c) {
 
 /**
  * method to prompt user for their move
- * @param c - the user's color
  * @return - the move they've chosen
  */
-Move Human::promptMove(bool c) {
+Move Human::promptMove() {
 	std::string s;
-	std::vector<Move> moveList = getBoard()->getAllMoves(!c);
+	std::vector<Move> moveList = getBoard()->getAllMoves(!getColor());
 	removeCheckedMoves(moveList);
 	while(true) { // continue prompting until valid
 		std::cout << "\n";

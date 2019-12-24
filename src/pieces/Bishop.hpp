@@ -16,9 +16,8 @@ class Bishop : public Piece {
 		const static unsigned int MAX_MOVE = 8;
 	public:
 		Bishop(bool); // constructor
-		std::auto_ptr<Piece> clone() const; // copy constructor
+		std::shared_ptr<Piece> clone() const; // copy constructor
 		
 		// member methods
 		std::vector<Move> getMoves(Board*, unsigned int, unsigned int);
-		std::vector<Move> getPaths(Board*, unsigned int, unsigned int);
 };

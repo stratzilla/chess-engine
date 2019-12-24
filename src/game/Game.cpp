@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "../player/Player.hpp"
 
 /**
  * Game class definition
@@ -65,7 +64,7 @@ void Game::play() {
 void Game::whiteMove() {
 	std::cout << "\nWhite to move...\n";
 	// get a move as prompted
-	Move m = getPlayerWhite().promptMove(getPlayerWhite().getColor());
+	Move m = getPlayerWhite().promptMove();
 	std::cout << "\nWhite has moved " << m << "\n";
 	makeMove(m); // make the move
 }
@@ -74,7 +73,7 @@ void Game::whiteMove() {
 void Game::blackMove() {
 	std::cout << "\nBlack to move...\n";
 	// get a move as prompted or AI generated
-	Move m = getPlayerBlack().promptMove(getPlayerBlack().getColor());
+	Move m = getPlayerBlack().promptMove();
 	std::cout << "\nBlack has moved " << m << "\n";
 	makeMove(m); // make the move
 }

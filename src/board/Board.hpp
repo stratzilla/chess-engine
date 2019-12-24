@@ -35,7 +35,6 @@ class Board {
 		void saveToFile(std::string, bool);
 		std::vector<Move> getAllMoves(bool);
 		std::vector<Move> getAllNonKingMoves(bool);
-		std::vector<Move> getAllPaths(bool);
 		bool determineCheckmate(bool);
 		bool determineStalemate(bool);
 		bool determineCheck(bool);

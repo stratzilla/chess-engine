@@ -17,10 +17,9 @@ Computer::Computer(bool c, unsigned int d) {
 
 /**
  * method to prompt user for their move
- * @param c - the user's color
  * @return - the move they've chosen
  */
-Move Computer::promptMove(bool c) {
+Move Computer::promptMove() {
 	// perform AI routine
 	return negamaxHandler(); // as found by negamax
 }
@@ -164,6 +163,7 @@ int Computer::evalBoard(Board* b) {
  * game states evaluated as well as the score
  * the AI gave the board
  * @param s - the score
+ * @param m - how many equivalent moves found
  */
 void Computer::printData(int s, unsigned int m) {
 	std::cout << "\n" << evalCount << " game states evaluated.\n";

@@ -19,5 +19,5 @@ class Human : public Player {
 		Human(bool); // constructor
 		
 		// public member methods
-		Move promptMove(bool);
+		Move promptMove();
 };

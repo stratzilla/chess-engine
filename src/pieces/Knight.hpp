@@ -16,7 +16,7 @@ class Knight : public Piece {
 		const static unsigned int MAX_MOVE = 2;
 	public:
 		Knight(bool); // constructor
-		std::auto_ptr<Piece> clone() const; // copy constructor
+		std::shared_ptr<Piece> clone() const; // copy constructor
 		
 		// member methods
 		std::vector<Move> getMoves(Board*, unsigned int, unsigned int);

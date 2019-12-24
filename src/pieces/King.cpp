@@ -19,8 +19,8 @@ King::King(bool c) {
  * copy constructor
  * @return - a copy of this object
  */
-std::auto_ptr<Piece> King::clone() const {
-	return std::auto_ptr<Piece>(new King(*this));
+std::shared_ptr<Piece> King::clone() const {
+	return std::shared_ptr<Piece>(new King(*this));
 }
 
 /**
@@ -107,64 +107,18 @@ std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 			}
 		}
 	}
-	// remove moves that would otherwise put king into check
-	removeIllegalMoves(b, moveList);
-	return moveList;
-}
-
-/**
- * method to remove moves that would be illegal
- * @param b - the board the piece is on
- */
-void King::removeIllegalMoves(Board* b, std::vector<Move> &m) {
 	std::vector<int> indexes; // so the indices don't get clobbered
-	// find all moves an opponent could make
-	std::vector<Move> moveList = b->getAllNonKingMoves(getColor());
-	for (unsigned int i = 0; i < m.size(); i++) {
-		for (unsigned int j = 0; j < moveList.size(); j++) {
-			/**
-			 * if move would result in being in way of another piece
-			 * or if move would bring king next to king
-			 * or if move would result in check
-			 */
-			if (m[i] >= moveList[j]) {
-				indexes.insert(indexes.begin(), i);
-				break;
-			}
-		}
-	}
-	// remove the moves that would put king in check
-	for (unsigned int i = 0; i < indexes.size(); i++) {
-		m.erase(m.begin() + indexes[i]);
-	}
-	// reset indices, need new set for paths
-	indexes.clear();
-	/**
-	 * remove move in which a path will coincide from opponent
-	 * consider a scenario where you have - K - - R
-	 * a king could not move west as it is still in the "killpath" of rook
-	 */
-	std::vector<Move> pathList = b->getAllPaths(getColor());
-	for (unsigned int i = 0; i < m.size(); i++) {
-		for (unsigned int j = 0; j < pathList.size(); j++) {
-			// if destination of opponent path is within king move list
-			if (m[i] >= pathList[j]) { indexes.insert(indexes.begin(), i); break; }
-		}
-	}
-	// remove the moves that would put king in check
-	for (unsigned int i = 0; i < indexes.size(); i++) {
-		m.erase(m.begin() + indexes[i]);
-	}
-	indexes.clear();
-	for (unsigned int i = 0; i < m.size(); i++) {
-		if (checkSurroundingKings(b, m[i])) {
+	// remove moves that would put king next to king
+	for (unsigned int i = 0; i < moveList.size(); i++) {
+		if (checkSurroundingKings(b, moveList[i])) {
 			indexes.insert(indexes.begin(), i);
 		}
 	}
 	for (unsigned int i = 0; i < indexes.size(); i++) {
-		m.erase(m.begin() + indexes[i]);
+		moveList.erase(moveList.begin() + indexes[i]);
 	}
 	indexes.clear();
+	return moveList;
 }
 
 /**

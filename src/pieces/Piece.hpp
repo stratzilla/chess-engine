@@ -1,7 +1,7 @@
 #pragma once
 #include "../game/Move.hpp"
 #include <vector>
-#include <memory> // for auto_ptr
+#include <memory> // for shared_ptr
 
 class Board;
 
@@ -24,14 +24,13 @@ class Piece {
 	public:
 		virtual ~Piece(); // destructor	
 		// pure abstract copy constructor
-		virtual std::auto_ptr<Piece> clone() const=0;
+		virtual std::shared_ptr<Piece> clone() const=0;
 	
 		// likewise to avoid magic numbers: quantify which color is what
 		const static bool WHITE = true, BLACK = false;
 		
 		// public member methods
-		virtual std::vector<Move> getMoves(Board*, unsigned int, unsigned int);
-		virtual std::vector<Move> getPaths(Board*, unsigned int, unsigned int);
+		virtual std::vector<Move> getMoves(Board*, unsigned int, unsigned int) = 0;
 		
 		// accessor methods
 		bool getMoved();

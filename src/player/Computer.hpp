@@ -29,5 +29,5 @@ class Computer : public Player {
 		Computer(bool, unsigned int);
 		
 		// member methods
-		Move promptMove(bool);
+		Move promptMove();
 };

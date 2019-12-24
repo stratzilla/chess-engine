@@ -19,8 +19,8 @@ Knight::Knight(bool c) {
  * copy constructor
  * @return - a copy of this object
  */
-std::auto_ptr<Piece> Knight::clone() const {
-	return std::auto_ptr<Piece>(new Knight(*this));
+std::shared_ptr<Piece> Knight::clone() const {
+	return std::shared_ptr<Piece>(new Knight(*this));
 }
 
 /**

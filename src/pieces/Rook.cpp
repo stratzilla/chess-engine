@@ -19,8 +19,8 @@ Rook::Rook(bool c) {
  * copy constructor
  * @return - a copy of this object
  */
-std::auto_ptr<Piece> Rook::clone() const {
-	return std::auto_ptr<Piece>(new Rook(*this));
+std::shared_ptr<Piece> Rook::clone() const {
+	return std::shared_ptr<Piece>(new Rook(*this));
 }
 
 /**
@@ -71,47 +71,4 @@ std::vector<Move> Rook::getMoves(Board* b, unsigned int c, unsigned int r) {
 		}
 	}
 	return moveList;
-}
-
-/**
- * Paths method
- * creates a collection of paths the piece may make
- * logic is specific to King
- * @param b - the current board
- * @param c, r - the coordinate of the piece
- * @return - a collection of paths
- */
-std::vector<Move> Rook::getPaths(Board* b, unsigned int c, unsigned int r) {
-	/**
-	 * concerning kings: a king may not move to a position that
-	 * would put it in check. However, the getMoves() method
-	 * does not consider positions a checking piece would move
-	 * to were the king not there. This adds those moves
-	 * for verifying king checking
-	 */
-	std::vector<Move> pathList;
-	for (unsigned int j = 0; j < MOVE_NUM; j++) {
-		int x = c, y = r;
-		for (unsigned int i = MIN_MOVE; i < MAX_MOVE; i++, x = c, y = r) {
-			switch(j) {
-				case 0: y += i; break; // north
-				case 1: x += i; break; // east
-				case 2: y -= i; break; // south
-				case 3: x -= i; break; // west
-			}
-			if (checkInBounds(x, y)) {
-				// get the tile
-				Tile possibleMove = (*b)(x, y);
-				// if occupied and same color king
-				if (possibleMove) {
-					if (possibleMove.getPiece().getType() == ((!getColor()) ? 'K' : 'k')) {
-						pathList.push_back(Move(c, r, x, y));
-					} else { break; } // can't go past pieces, only king
-				} else { // free tiles default valid
-					pathList.push_back(Move(c, r, x, y));
-				}
-			}
-		}
-	}
-	return pathList;
 }
