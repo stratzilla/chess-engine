@@ -7,8 +7,8 @@
 class Game {
 	private:
 		Board* gameboard; // the current board
-		Player* wh; Player* bl; // players
-		int gameState; // CM, SM, C
+		Player* playerA; Player* playerB; // players
+		unsigned int gameState; // current game state
 		
 		// private member methods
 		void whiteMove();

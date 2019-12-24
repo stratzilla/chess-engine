@@ -8,12 +8,8 @@
  * Bishop constructor
  * @param c - the color of the piece
  */
-Bishop::Bishop(bool c) {
-	setColor(c);
-	setValue(3); // bishop is worth 3 points
-	setType('B'); // method will convert to 'b' if needed
-	setMoved(false);
-}
+Bishop::Bishop(bool c)
+	: Piece(c, 3, 'B') {}
 
 /**
  * copy constructor

@@ -11,7 +11,7 @@
  * @param black - the black player
  */
 Game::Game(Board* b, Player* white, Player* black)
-	: gameboard(b), wh(white), bl(black), gameState(0) { 
+	: gameboard(b), playerA(white), playerB(black), gameState(0) { 
 	getPlayerWhite().setBoard(b); // allow visibility of board to white
 	getPlayerBlack().setBoard(b); // same for black
 }
@@ -24,8 +24,9 @@ void Game::play() {
 			getBoard()->printBoard(); // print current board
 			// check if checkmate, check, or stalemate occurred
 			if (getBoard()->determineCheckmate(getPlayerWhite().getColor())) {
-				setGameState(-1); break; 
+				setGameState(2); break; 
 			}
+			if (getBoard()->determineDraw()) { setGameState(1); break; }
 			if (getBoard()->determineStalemate(getPlayerWhite().getColor())) {
 				break;
 			}
@@ -36,11 +37,12 @@ void Game::play() {
 		} else if (!getBoard()->getCurrentPlayer()) {
 			getBoard()->printBoard();
 			if (getBoard()->determineCheckmate(getPlayerBlack().getColor())) { 
-				setGameState(1); break;
+				setGameState(3); break;
 			}
 			if (getBoard()->determineStalemate(getPlayerBlack().getColor())) {
 				break;
 			}
+			if (getBoard()->determineDraw()) { setGameState(1); break; }
 			if (getBoard()->determineCheck(getPlayerBlack().getColor())) {
 				std::cout << "\nBlack is in check!\n";
 			}
@@ -50,9 +52,10 @@ void Game::play() {
 		getBoard()->setCurrentPlayer(!getBoard()->getCurrentPlayer());
 	}
 	switch(getGameState()) { // if game is over
-		case -1: std::cout << "\nBlack checkmates white.\n\n"; break;
 		case 0: std::cout << "\nStalemate.\n\n"; break;
-		case 1: std::cout << "\nWhite checkmates black.\n\n"; break;
+		case 1: std::cout << "\nDraw.\n\n"; break;
+		case 2: std::cout << "\nBlack checkmates white.\n\n"; break;
+		case 3: std::cout << "\nWhite checkmates black.\n\n"; break;
 	}
 }
 
@@ -85,8 +88,8 @@ void Game::makeMove(Move m) {
 // accessor methods
 Board* Game::getBoard() { return gameboard; }
 int Game::getGameState() { return gameState; }
-Player& Game::getPlayerWhite() { return *wh; }
-Player& Game::getPlayerBlack() { return *bl; }
+Player& Game::getPlayerWhite() { return *playerA; }
+Player& Game::getPlayerBlack() { return *playerB; }
 
 // mutator methods
 void Game::setGameState(int s) { gameState = s; }

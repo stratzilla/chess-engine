@@ -11,6 +11,8 @@ class Board; // forward declaration
  */
 class Piece {
 	protected:
+		Piece(bool, unsigned int, char); // constructor
+		
 		// to avoid magic numbers: contain number of rows/cols
 		const static unsigned int ROWS = 8, COLS = 8;
 		const static bool WHITE = true, BLACK = false;		

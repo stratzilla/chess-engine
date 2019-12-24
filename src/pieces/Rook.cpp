@@ -8,12 +8,8 @@
  * Rook constructor
  * @param c - the color of the piece
  */
-Rook::Rook(bool c) {
-	setColor(c);
-	setValue(5); // rook is worth 5 points
-	setType('R'); // method will convert to 'r' if needed
-	setMoved(false);
-}
+Rook::Rook(bool c)
+	: Piece(c, 5, 'R') {}
 
 /**
  * copy constructor

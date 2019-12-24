@@ -8,12 +8,8 @@
  * Pawn constructor
  * @param c - the color of the piece
  */
-Pawn::Pawn(bool c) {
-	setColor(c);
-	setValue(1); // pawn is worth 1 point
-	setType('P'); // method will convert to 'p' if needed
-	setMoved(false);
-}
+Pawn::Pawn(bool c)
+	: Piece(c, 1, 'P') {}
 
 /**
  * copy constructor

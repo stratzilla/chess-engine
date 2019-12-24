@@ -186,29 +186,6 @@ bool Board::determineCheckmate(bool c) {
 }
 
 /**
- * method to determine if a player is in stalemate
- * @param c - the player to check
- * @return - whether that player is in stalemate
- */
-bool Board::determineStalemate(bool c) {
-	// cannot be in stalemate if in check
-	if (determineCheck(c)) { return false; }
-	// if you cannot make any moves, it is a stalemate
-	if (getAllMoves(!c).size() == 0) { return true; }
-	// otherwise, lets see if only two kings exist
-	int countKings = 0;
-	for (unsigned int i = 0; i < COLS; i++) {
-		for (unsigned int j = 0; j < ROWS; j++) {
-			if ((*this)(j, i)) { // if piece exists
-				countKings += (*this)(j, i).getPiece().getValue();
-			}
-		}
-	}
-	// two kings would have board value 200
-	return (countKings == 200);
-}
-
-/**
  * method to determine if a color is in check
  * @param c - the color to check
  * @return - whether that player is in check
@@ -225,6 +202,37 @@ bool Board::determineCheck(bool c) {
 		}
 	}
 	return false;
+}
+
+/**
+ * method to determine if a player is in stalemate
+ * @param c - the player to check
+ * @return - whether that player is in stalemate
+ */
+bool Board::determineStalemate(bool c) {
+	// cannot be in stalemate if in check
+	if (determineCheck(c)) { return false; }
+	// if you cannot make any moves, it is a stalemate
+	if (getAllMoves(!c).size() == 0) { return true; }
+	return false; // all else, not stalemate
+}
+
+/**
+ * method to determine a draw has occurred
+ * @return - whether a draw has occurred
+ */
+bool Board::determineDraw() {
+	// determine if only the two kings exist
+	int countKings = 0;
+	for (unsigned int i = 0; i < COLS; i++) {
+		for (unsigned int j = 0; j < ROWS; j++) {
+			if ((*this)(j, i)) { // if piece exists
+				countKings += (*this)(j, i).getPiece().getValue();
+			}
+		}
+	}
+	// two kings would have board value 200
+	return (countKings == 200);
 }
 
 /**

@@ -8,12 +8,8 @@
  * Knight constructor
  * @param c - the color of the piece
  */
-Knight::Knight(bool c) {
-	setColor(c);
-	setValue(3); // knight is worth 3 points
-	setType('N'); // method will convert to 'n' if needed
-	setMoved(false);
-}
+Knight::Knight(bool c)
+	: Piece(c, 3, 'N') {}
 
 /**
  * copy constructor

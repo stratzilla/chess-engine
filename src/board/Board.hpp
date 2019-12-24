@@ -38,6 +38,7 @@ class Board {
 		bool determineCheckmate(bool);
 		bool determineStalemate(bool);
 		bool determineCheck(bool);
+		bool determineDraw();
 		int getAllPieceValues(bool);
 		int getAllMobilityValues(bool);
 		int getAllPawnValues(bool);

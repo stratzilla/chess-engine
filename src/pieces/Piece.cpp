@@ -4,6 +4,17 @@
  * Piece class definition
  */
 
+/**
+ * piece class constructor
+ * @param c - the color of the piece
+ * @param v - the value of the piece
+ * @param t - the type of the piece
+ */
+Piece::Piece(bool c, unsigned int v, char t)
+	: color(c), value(v), hasMoved(false) {
+		setType(t);
+	}
+
 // virtual destructor
 Piece::~Piece() {}
 

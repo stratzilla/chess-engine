@@ -8,12 +8,8 @@
  * Queen constructor
  * @param c - the color of the piece
  */
-Queen::Queen(bool c) {
-	setColor(c);
-	setValue(9); // queen is worth 9 points
-	setType('Q'); // method will convert to 'q' if needed
-	setMoved(false);
-}
+Queen::Queen(bool c)
+	: Piece(c, 9, 'Q') {}
 
 /**
  * copy constructor

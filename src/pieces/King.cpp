@@ -8,12 +8,8 @@
  * King constructor
  * @param c - the color of the piece
  */
-King::King(bool c) {
-	setColor(c);
-	setValue(100); // king is worth 100 points
-	setType('K'); // method will convert to 'k' if needed
-	setMoved(false);
-}
+King::King(bool c)
+	: Piece(c, 100, 'K') {}
 
 /**
  * copy constructor
@@ -125,7 +121,7 @@ std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 /**
  * method to check if a move is next to opposing king
  * @param b - the board to use
- * @param c, r - the coordinate to check
+ * @param m - the coordinate of the piece
  * @return - whether that move has surrounding kings
  */
 bool King::checkSurroundingKings(Board* b, Move m) {
