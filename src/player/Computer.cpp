@@ -105,20 +105,20 @@ Move Computer::negamaxHandler() {
  */
 int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 	evalCount++; // increment count to display positions evaluated
-	// terminal case would be stalemate or checkmate
+	// terminal case would be stalemate or checkmate or depth zero
 	if (d == 0) { // base recursive case
+		/**
+		 * consider a checkmate as best possible configuration
+		 * this will become -INT_MAX were it the minimizing
+		 * player, so it handles both cases
+		 */
+		if (b->determineCheckmate(p)) { return INT_MAX; }
+		// consider a stalemate is better than losing
+		if (b->determineStalemate(p)) { return 0; }
 		return (p == getColor() ? 1 : -1) * evalBoard(b); // return that board's evaluation
 	}
-	/**
-	 * consider a checkmate as best possible configuration
-	 * this will become -INT_MAX were it the minimizing
-	 * player, so it handles both cases
-	 */
-	if (b->determineCheckmate(p)) { return INT_MAX; }
-	// consider a stalemate is better than losing
-	if (b->determineStalemate(p)) { return 0; }
 	// putting another person in check is beneficial
-	if (b->determineCheck(p)) { return evalBoard(b) * 10; }
+	if (b->determineCheck(p)) { return (p == getColor() ? 2 : -2) * evalBoard(b); }
 	int value = INT_MIN; // initially minimum (will overwrite)
 	std::vector<Move> moveList = b->getAllMoves(!p); // get moves of opponent
 	for (unsigned int i = 0; i < moveList.size(); i++) {
@@ -157,7 +157,7 @@ int Computer::evalBoard(Board* b) {
 	 */
 	int c1 = 12, c2 = 1, c3 = 3;
 	// evaluation is a function of material, board control, pawn control
-	return c1*value + c2*mobility + c3*pawns;
+	return (c1*value) + (c2*mobility) + (c3*pawns);
 }
 
 /**
@@ -165,12 +165,12 @@ int Computer::evalBoard(Board* b) {
  * game states evaluated as well as the score
  * the AI gave the board
  * @param s - the score
- * @param m - how many equivalent moves found
+ * @param e - how many equivalent moves found
  */
-void Computer::printData(int s, unsigned int m) {
+void Computer::printData(int s, unsigned int e) {
 	std::cout << "\n" << evalCount << " game states evaluated.\n";
-	if (m > 1) {
-		std::cout << "Found " << m << " equivalent moves; chose one stochastically.\n";
+	if (e > 1) {
+		std::cout << "Found " << e << " equivalent moves; chose one stochastically.\n";
 	}
 	std::cout << (getColor() ? "White" : "Black");
 	std::cout << " chose a move with score " << s << ".\n";

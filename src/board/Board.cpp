@@ -192,34 +192,20 @@ bool Board::determineCheckmate(bool c) {
  */
 bool Board::determineStalemate(bool c) {
 	// cannot be in stalemate if in check
-	if (!determineCheck(c)) { 
-		for (unsigned int i = 0; i < COLS; i++) {
-			for (unsigned int j = 0; j < ROWS; j++) {
-				// if piece on tile
-				if (((*this)(j, i))
-				// if piece same color
-				&& ((*this)(j, i).getPiece().getColor() == c)
-				// if piece is king
-				&& ((*this)(j, i).getPiece().getType() == ((c) ? 'K' : 'k'))) {
-					// find how many moves your other pieces can make
-					unsigned int ownMoves = getAllMoves(!c).size();
-					// find how many moves the king can make
-					unsigned int kingMoves = (*this)(j, i).getPiece().getMoves(this, j, i).size();
-					// a stalemate is when you cannot move king but have nothing else to move
-					return ((ownMoves + kingMoves) == 0);
-				}
-			}
-		}
-	}
-	// a stalemate also occurs were only the two kings on board
+	if (determineCheck(c)) { return false; }
+	// if you cannot make any moves, it is a stalemate
+	if (getAllMoves(!c).size() == 0) { return true; }
+	// otherwise, lets see if only two kings exist
 	int countKings = 0;
 	for (unsigned int i = 0; i < COLS; i++) {
 		for (unsigned int j = 0; j < ROWS; j++) {
-			if ((*this)(j, i) && (*this)(j, i).getPiece().getType() == 'k') { countKings++; }
-			if ((*this)(j, i) && (*this)(j, i).getPiece().getType() == 'K') { countKings--; }
+			if ((*this)(j, i)) { // if piece exists
+				countKings += (*this)(j, i).getPiece().getValue();
+			}
 		}
 	}
-	return (countKings != 0);
+	// two kings would have board value 200
+	return (countKings == 200);
 }
 
 /**
@@ -342,16 +328,15 @@ int Board::getAllPawnValues(bool c) {
 	int count = 0;
 	for (unsigned int i = 0; i < COLS; i++) {
 		for (unsigned int j = 0; j < ROWS; j++) {
-			if ((*this)(j, i)) {
-				// if piece exists and right color
+			// if piece exists and is pawn
+			if ((*this)(j, i) && (*this)(j, i).getPiece().getValue() == 1) {
+				// if matching color
 				if ((*this)(j, i).getPiece().getColor() == c) {
-					if ((*this)(j, i).getPiece().getType() == 'P' || (*this)(j, i).getPiece().getType() == 'p') {
-						count += (c ? i-1 : 6-i);
-					}
+					// white pawns are on second row initially
+					count += ((c == WHITE) ? i-1 : 6-i);
 				} else {
-					if ((*this)(j, i).getPiece().getType() == 'P' || (*this)(j, i).getPiece().getType() == 'p') {
-						count -= (c ? 6-i : i-1);
-					}
+					// black pawns are on seventh row initially
+					count -= ((c == WHITE) ? 6-i : i-1);
 				}
 			}
 		}
@@ -445,7 +430,7 @@ void Board::showMoves(unsigned int c, unsigned int r, std::vector<Move> m) {
 		std::cout << (char)(97 + i) << "   ";
 	}
 	std::cout << "\n\n";
-	std::cout << ((moveList.size() > 0) ? "Moves:\n" : "No moves.\n\n");
+	std::cout << ((moveList.size() > 0) ? "Moves:\n" : "No moves.\n");
 	for (unsigned int i = 0; i < moveList.size(); i++) {
 		std::cout << moveList[i];
 		if ((i+1) % 5 == 0) {

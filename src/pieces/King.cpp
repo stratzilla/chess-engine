@@ -118,6 +118,7 @@ std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 		moveList.erase(moveList.begin() + indexes[i]);
 	}
 	indexes.clear();
+	removeCheckedMoves(b, moveList);
 	return moveList;
 }
 
@@ -150,4 +151,25 @@ bool King::checkSurroundingKings(Board* b, Move m) {
 		}
 	}
 	return false; // no surrounding kings
+}
+
+/**
+ * method to remove moves which would put king in check
+ * @param m - movelist to remove moves from
+ */
+void King::removeCheckedMoves(Board* b, std::vector<Move> &m) {
+	std::vector<int> indexes;
+	for (unsigned int i = 0; i < m.size(); i++) {
+		// make move on a copy and check if check
+		Board* copy = new Board(*b);
+		copy->movePiece(m[i]);
+		if (copy->determineCheck(getColor())) {
+			indexes.insert(indexes.begin(), i);
+		}
+		delete copy;
+	}
+	for (unsigned int i = 0; i < indexes.size(); i++) {
+		m.erase(m.begin() + indexes[i]);
+	}
+	indexes.clear();
 }

@@ -23,4 +23,5 @@ class King : public Piece {
 		
 		// member methods
 		std::vector<Move> getMoves(Board*, unsigned int, unsigned int);
+		void removeCheckedMoves(Board*, std::vector<Move>&);
 };
