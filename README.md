@@ -146,7 +146,7 @@ While the performance is system specific, using a depth of `[1, 4]` results in f
 | 2     | <0.005s    | <0.008s     | <0.001s   | <0.002s |
 | 3     | <0.01s     | <0.03s      | <0.01s    | <0.01s  |
 | 4     | <0.4s      | <0.5s       | <0.1s     | <0.4s   |
-| 5     | <1.3s      | <6.0s       | <1.9s     | <4.2s   |
+| 5     | <1.4s      | <6.2s       | <0.9s     | <3.2s   |
 | 6     | <38s       | <58s        | <21s      | <45s    |
 
 Beyond a depth of `6`, each move takes over a minute so I did not test. As for how the AI itself performs from a chess strategy standpoint: it relies heavily on appropriate heuristic evaluation coefficient choices. For the defined coefficients above, it is adequate and able to best myself at least.
