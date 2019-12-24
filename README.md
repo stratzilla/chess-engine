@@ -11,9 +11,9 @@ You can clone these files to your computer with the below:
 Compile with the below:
 
 ` $ cd chess-engine`  
-` $ g++ src/source.cpp src/*/*.cpp -Wno-deprecated -o chess`
+` $ g++ src/source.cpp src/*/*.cpp -o chess`
 
-With execution as below:
+Using `-O2` or `-O3` is advised. Execution as below:
 
 ` $ ./chess <args>`
 
@@ -45,12 +45,12 @@ Execute with no arguments to be reminded of compilation and argument requirement
 # Dependencies
 
 - gcc/g++
-- C++ (support for C++0x or higher, may need `-std=c++0x` flag
+- C++ (support for C++11 or higher, may need `-std=c++11` flag
 - GNU/Linux
 
 # How to Play
 
-Upon executing the program with correct arguments, a chessboard will appear. Choose a move in the form of `a0b1` (for `a0` moves to `b1`), or just a single coordinate to display moves (for `a0`, this will display all moves the piece on `a0` could move). You can save the game or quit the game using commands `save` and `quit` respectively. As to how to play chess or play it effectively, I leave it as an exercise to the reader.
+Upon executing the program with correct arguments, a chessboard will appear. Choose a move in the form of `a1b2` (for `a1` moves to `b2`), or just a single coordinate to display moves (for `a1`, this will display all moves the piece on `a1` could move). You can save the game or quit the game using commands `save` and `quit` respectively. As to how to play chess or play it effectively, I leave it as an exercise to the reader.
 
 # Chess Representation
 
@@ -90,6 +90,8 @@ This strikes a decent balance between keeping/taking pieces, making room for AI 
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%20%5Cgg%20c_3%20%3E%20c_2" />
 
 That is, <img src="https://latex.codecogs.com/png.latex?c_1" /> should be the largest coefficient by some bigger degree than <img src="https://latex.codecogs.com/png.latex?c_3" /> is to <img src="https://latex.codecogs.com/png.latex?c_2" />.
+
+It's useful to experiment because the heuristic can always be improved. Alternatively, you could design a genetic algorithm to find best coefficients.
 
 # NegaMax/MiniMax Tree Search with Alpha-Beta Pruning
 
