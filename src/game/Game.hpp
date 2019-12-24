@@ -22,8 +22,6 @@ class Game {
 		int getGameState();
 		
 		// private mutator methods
-		void setPlayerWhite(Player*);
-		void setPlayerBlack(Player*);
 		void setGameState(int);
 	public:
 		Game(Board*, Player*, Player*); // constructor

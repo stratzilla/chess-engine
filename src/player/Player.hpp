@@ -16,6 +16,9 @@ class Player {
 		
 		// protected accessor methods
 		Board* getBoard();
+		
+		// protected mutator methods
+		void setColor(bool);
 	public:
 		// member methods
 		virtual Move promptMove() = 0;
@@ -23,7 +26,6 @@ class Player {
 		// public accessor methods
 		bool getColor();
 		
-		// mutator methods
-		void setColor(bool);
+		// public mutator methods
 		void setBoard(Board*);
 };

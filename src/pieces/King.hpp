@@ -17,11 +17,11 @@ class King : public Piece {
 		
 		// private member methods
 		bool checkSurroundingKings(Board*, Move);
+		void removeCheckedMoves(Board*, std::vector<Move>&);
 	public:
 		King(bool); // constructor
 		std::shared_ptr<Piece> clone() const; // copy constructor
 		
 		// member methods
 		std::vector<Move> getMoves(Board*, unsigned int, unsigned int);
-		void removeCheckedMoves(Board*, std::vector<Move>&);
 };

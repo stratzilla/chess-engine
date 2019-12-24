@@ -24,6 +24,7 @@ class Board {
 		// private member methods
 		void initNormalBoard();
 		void initSavedBoard(std::string);
+		std::vector<Move> getAllNonKingMoves(bool);
 	public:
 		Board(); // default constructor
 		Board(std::string); // parameterized constructor
@@ -34,7 +35,6 @@ class Board {
 		void movePiece(Move);
 		void saveToFile(std::string, bool);
 		std::vector<Move> getAllMoves(bool);
-		std::vector<Move> getAllNonKingMoves(bool);
 		bool determineCheckmate(bool);
 		bool determineStalemate(bool);
 		bool determineCheck(bool);

@@ -22,12 +22,6 @@ class Move {
 		unsigned int getDestR();
 		unsigned int getDestC();
 		
-		// mutator methods
-		void setOrigR(unsigned int);
-		void setOrigC(unsigned int);
-		void setDestR(unsigned int);
-		void setDestc(unsigned int);
-		
 		// operator methods
 		bool operator==(Move&);
 		bool operator>=(Move&);

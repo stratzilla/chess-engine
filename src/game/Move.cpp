@@ -12,10 +12,8 @@ Move::Move() {}
  * @param oC, oR - the origin of the move (col, row)
  * @param dC, dR - the destination of the move (col, row)
  */
-Move::Move(unsigned int oC, unsigned int oR, unsigned int dC, unsigned int dR) {
-	origR = oR; origC = oC;
-	destR = dR; destC = dC;
-}
+Move::Move(unsigned int oC, unsigned int oR, unsigned int dC, unsigned int dR) :
+	origC(oC), origR(oR), destC(dC), destR(dR) {}
 
 /**
  * method to create printable string of move
@@ -34,12 +32,6 @@ unsigned int Move::getOrigR() { return origR; }
 unsigned int Move::getOrigC() { return origC; }
 unsigned int Move::getDestR() { return destR; }
 unsigned int Move::getDestC() { return destC; }
-
-// mutator methods
-void Move::setOrigR(unsigned int oR) { origR = oR; }
-void Move::setOrigC(unsigned int oC) { origC = oC; }
-void Move::setDestR(unsigned int dR) { destR = dR; }
-void Move::setDestc(unsigned int dC) { destC = dC; }
 
 // operator methods
 bool Move::operator==(Move &m) {

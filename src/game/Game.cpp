@@ -10,14 +10,10 @@
  * @param white - the white player
  * @param black - the black player
  */
-Game::Game(Board* b, Player* white, Player* black) { 
-	gameboard = b;
-	setPlayerWhite(white);
+Game::Game(Board* b, Player* white, Player* black)
+	: gameboard(b), wh(white), bl(black), gameState(0) { 
 	getPlayerWhite().setBoard(b); // allow visibility of board to white
-	setPlayerBlack(black);
 	getPlayerBlack().setBoard(b); // same for black
-	// initially set to draw condition, doesn't mean draw until later
-	setGameState(0);
 }
 
 // main game playing method
@@ -93,6 +89,4 @@ Player& Game::getPlayerWhite() { return *wh; }
 Player& Game::getPlayerBlack() { return *bl; }
 
 // mutator methods
-void Game::setPlayerWhite(Player* p) { wh = p; }
-void Game::setPlayerBlack(Player* p) { bl = p; }
 void Game::setGameState(int s) { gameState = s; }
