@@ -8,9 +8,6 @@
  */
 class Player {
 	private:
-		// to avoid magic numbers
-		const static bool WHITE = true, BLACK = false;
-	
 		Board* gameboard; // the board the player is playing
 		bool color; // color of the player
 	protected:
@@ -21,7 +18,7 @@ class Player {
 		Board* getBoard();
 	public:
 		// member methods
-		virtual Move promptMove();
+		virtual Move promptMove() = 0;
 		
 		// public accessor methods
 		bool getColor();

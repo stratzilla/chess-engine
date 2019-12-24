@@ -3,15 +3,6 @@
 /**
  * Player class definition
  */
- 
-/**
- * method to prompt user for move
- * default behavior implicitly overriden by derived classes
- * in other words, never used
- */
-Move Player::promptMove() {
-	return Move(0, 0, 0, 0);
-}
 
 /**
  * method to remove moves which would put player in check
@@ -26,6 +17,7 @@ void Player::removeCheckedMoves(std::vector<Move> &m) {
 		if (copy->determineCheck(getColor())) {
 			indexes.insert(indexes.begin(), i);
 		}
+		delete copy;
 	}
 	for (unsigned int i = 0; i < indexes.size(); i++) {
 		m.erase(m.begin() + indexes[i]);

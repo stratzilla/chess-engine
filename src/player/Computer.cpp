@@ -67,6 +67,7 @@ Move Computer::negamaxHandler() {
 			bestMoves.clear(); // don't need worse moves
 			bestMoves.push_back(moveList[i]);
 		}
+		delete copy;
 	}
 	/** 
 	 * I was unable to catch instances where the movelist is zero, leading to null move
@@ -128,6 +129,7 @@ int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 		value = std::max(value, v);
 		alf = std::max(alf, value);
 		if (alf >= bet) { break; } // cutoff for branches
+		delete copy;
 	}
 	return value;
 }
