@@ -57,6 +57,7 @@ Move Computer::negamaxHandler() {
 		copy->movePiece(moveList[i]); // make move on copy
 		// find value of that move
 		int value = -negamax(copy, getDepth()-1, INT_MIN, INT_MAX, !getColor());
+		delete copy;
 		// if same worth or not enough to fill queue
 		if (value == bestMoveValue || moveList.size() <= BUFFER) {
 			// add it to the collection
@@ -67,7 +68,6 @@ Move Computer::negamaxHandler() {
 			bestMoves.clear(); // don't need worse moves
 			bestMoves.push_back(moveList[i]);
 		}
-		delete copy;
 	}
 	/** 
 	 * I was unable to catch instances where the movelist is zero, leading to null move
@@ -126,10 +126,10 @@ int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 		copy->movePiece(moveList[i]); // make move on copy
 		// then recurse
 		int v = -negamax(copy, d-1, -bet, -alf, !p);
+		delete copy;
 		value = std::max(value, v);
 		alf = std::max(alf, value);
 		if (alf >= bet) { break; } // cutoff for branches
-		delete copy;
 	}
 	return value;
 }
