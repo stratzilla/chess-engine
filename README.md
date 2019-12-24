@@ -27,7 +27,7 @@ Using two arguments:
   2. Human vs. Computer
   3. Computer vs. Computer
  <arg2> - Depth for Tree Search
-  Some integer value >0
+  - some integer value >0
 ```
 
 Using three arguments:
@@ -136,14 +136,15 @@ Besides alpha-beta pruning, the tree search is exhaustive but it doesn't need to
 
 # Performance
 
-While the performance is system specific, using a depth of `[1, 4]` results in fairly speedy AI decision. The program can accept any depth greater than `0`, although the depth which NegaMax search uses is one plus this number (eg. using a depth of 1 searches 1 ply beyond available moves). Timing for moves is below:
+While the performance is system specific, using a depth of `[1, 4]` results in fairly speedy AI decision with a depth of `5` having adequate speed. The program can accept any depth greater than `0`, although the depth which NegaMax search uses is one plus this number (eg. using a depth of `1` searches 1 ply beyond available moves). Timing for moves is below:
 
 | Depth | Early Game | Middle Game | Late Game | Average |
 | ----- | ---------- | ----------- | --------- | ------- |
-| 1     | <0.01s     | <0.02s      | <0.01s    | <0.02s  |
-| 2     | <0.02s     | <0.02s      | <0.01s    | <0.02s  |
-| 3     | <0.06s     | <0.08s      | <0.05s    | <0.06s  |
-| 4     | <0.3s      | <0.5s       | <0.1s     | <0.3s   |
-| 5     | <5s        | <9s         | <2s       | <6s     |
+| 1     | <0.001s    | <0.001s     | <0.001s   | <0.001s |
+| 2     | <0.005s    | <0.008s     | <0.001s   | <0.002s |
+| 3     | <0.01s     | <0.03s      | <0.01s    | <0.01s  |
+| 4     | <0.4s      | <0.5s       | <0.1s     | <0.4s   |
+| 5     | <1.3s      | <6.0s       | <1.9s     | <4.2s   |
+| 6     | <38s       | <58s        | <21s      | <45s    |
 
-Beyond a depth of 5, each move takes over a minute. As for how the AI itself performs from a chess strategy standpoint: it relies heavily on appropriate heuristic evaluation coefficient choices. For the defined coefficients above, it is adequate and able to best myself at least.
+Beyond a depth of `6`, each move takes over a minute so I did not test. As for how the AI itself performs from a chess strategy standpoint: it relies heavily on appropriate heuristic evaluation coefficient choices. For the defined coefficients above, it is adequate and able to best myself at least.
