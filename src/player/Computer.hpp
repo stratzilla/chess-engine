@@ -11,8 +11,8 @@ class Computer : public Player {
 	private:
 		unsigned int depth;
 		unsigned int evalCount;
-		const static unsigned int BUFFER = 3;
-		std::vector<std::string> moveQueue;
+		const static unsigned int BUFFER_SIZE = 3;
+		std::vector<std::string> buffer;
 		
 		// private member methods
 		Move negamaxHandler();
@@ -28,6 +28,6 @@ class Computer : public Player {
 	public:
 		Computer(bool, unsigned int);
 		
-		// member methods
+		// public member methods
 		Move promptMove();
 };

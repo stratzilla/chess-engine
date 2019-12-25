@@ -25,5 +25,5 @@ class Tile {
 		Tile& operator=(const Tile&);
 		Tile& operator=(Piece*);
 		operator bool() const;
-		friend std::ostream& operator<<(std::ostream&, Tile&); // stream insertion
+		friend std::ostream& operator<<(std::ostream&, Tile&);
 };

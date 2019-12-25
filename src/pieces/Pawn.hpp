@@ -14,6 +14,8 @@ class Pawn : public Piece {
 		const static unsigned int MIN_MOVE = 1;
 		// the furthest it may move
 		const static unsigned int MAX_MOVE = 2;
+		// for offsets
+		const static bool WHITE = true, BLACK = false;
 	public:
 		Pawn(bool); // constructor		
 		std::shared_ptr<Piece> clone() const; // copy constructor

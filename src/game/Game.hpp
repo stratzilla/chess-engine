@@ -26,6 +26,6 @@ class Game {
 	public:
 		Game(Board*, Player*, Player*); // constructor
 		
-		// member methods
+		// public member methods
 		void play();
 };

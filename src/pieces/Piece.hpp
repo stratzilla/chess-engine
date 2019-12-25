@@ -13,9 +13,8 @@ class Piece {
 	protected:
 		Piece(bool, unsigned int, char); // constructor
 		
-		// to avoid magic numbers: contain number of rows/cols
 		const static unsigned int ROWS = 8, COLS = 8;
-		const static bool WHITE = true, BLACK = false;		
+
 		bool hasMoved; // whether piece has moved or not (K, R)		
 		bool color; // the color of the piece
 		unsigned int value; // the value of the piece
@@ -29,7 +28,7 @@ class Piece {
 		virtual std::shared_ptr<Piece> clone() const=0;
 		
 		// public member methods
-		virtual std::vector<Move> getMoves(Board*, unsigned int, unsigned int) = 0;
+		virtual std::vector<Move> getMoves(Board*, unsigned int, unsigned int)=0;
 		
 		// accessor methods
 		bool getMoved();
@@ -39,7 +38,5 @@ class Piece {
 		
 		// mutator methods
 		void setMoved(bool);
-		void setColor(bool);
-		void setValue(unsigned int);
 		void setType(char);
 };

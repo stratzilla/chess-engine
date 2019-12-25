@@ -8,7 +8,7 @@ const bool WHITE = true, BLACK = false;
 // remind user of proper compilation and execution
 void printHelp() {
 	std::cout << "\nCompile and execute the program as so:\n\n";
-	std::cout << " $ g++ source.cpp */*.cpp -std=c++0x -Wno-deprecated -o chess\n";
+	std::cout << " $ g++ source.cpp */*.cpp -o chess\n";
 	std::cout << " $ ./chess <args>\n\n";
 	
 	std::cout << "You may use two arguments:\n";
@@ -29,9 +29,6 @@ void printHelp() {
 	std::cout << " - a single coordinate to see possible moves\n";
 	std::cout << " - \"save\" to save the current board\n";
 	std::cout << " - \"quit\" to quit the current game\n\n";
-	
-	std::cout << "Save files are stored as text files in saves directory.\n";
-	std::cout << "This will load a custom board state as described in that file.\n\n";
 }
 
 // main program driver

@@ -2,6 +2,7 @@
 
 /**
  * Knight class definition
+ * defines the behavior of Knight pieces
  */
 
 /**
@@ -9,10 +10,10 @@
  * @param c - the color of the piece
  */
 Knight::Knight(bool c)
-	: Piece(c, 3, 'N') {}
+	: Piece(c, 3, 'N') {} // chain into base class constructor
 
 /**
- * copy constructor
+ * explicit copy constructor
  * @return - a copy of this object
  */
 std::shared_ptr<Piece> Knight::clone() const {
@@ -20,18 +21,14 @@ std::shared_ptr<Piece> Knight::clone() const {
 }
 
 /**
- * Movement method
+ * method to determine which moves this piece may make
  * creates a collection of valid moves the piece can make
- * @param b - the current board
+ * @param b - the board the piece is on
  * @param c, r - the coordinate of the piece
- * @return - a collection of moves
+ * @return - a collection of moves this piece may make
  */
 std::vector<Move> Knight::getMoves(Board* b, unsigned int c, unsigned int r) {
 	std::vector<Move> moveList;
-	/**
-	 * knight has at most eight possible moves at any time
-	 * so add these moves if possible to the movelist
-	 */
 	for (unsigned int i = 0; i < MOVE_NUM; i++) {
 		int x = c, y = r; // signed as it may be OOB later
 		switch(i) {
@@ -44,17 +41,17 @@ std::vector<Move> Knight::getMoves(Board* b, unsigned int c, unsigned int r) {
 			case 6: x += MIN_MOVE; y -= MAX_MOVE; break; // south-south-east
 			case 7: x -= MIN_MOVE; y -= MAX_MOVE; break; // south-south-west
 		}
-		// if they're a valid move, append to the movelist
+		// determine if the move is valid
 		if (checkInBounds(x, y)) { // if valid board position
-			Tile possibleMove = (*b)(x, y); // get the tile
-			if (possibleMove) { // if occupied
-				// if capturing piece
+			Tile possibleMove = (*b)(x, y);
+			if (possibleMove) { // if tile is occupied
+				// if occupying piece is opposing color
 				if (possibleMove.getPiece().getColor() != color) {
-					// valid move
+					// capturing the piece is a valid move
 					moveList.push_back(Move(c, r, x, y));
 				}
-			} else { // if not occupied
-				// by default it is a valid move
+			} else { // if tile not occupied
+				// by default, a non-occupied tile is a valid move
 				moveList.push_back(Move(c, r, x, y));
 			}
 		}

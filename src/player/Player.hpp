@@ -21,7 +21,7 @@ class Player {
 		void setColor(bool);
 	public:
 		// member methods
-		virtual Move promptMove() = 0;
+		virtual Move promptMove()=0;
 		
 		// public accessor methods
 		bool getColor();

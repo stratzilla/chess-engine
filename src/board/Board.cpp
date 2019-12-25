@@ -2,6 +2,8 @@
 
 /**
  * Board class definition
+ * describes how the game board is organized
+ * as well as some gameplay logic related to the board
  */
 
 // default board constructor
@@ -25,17 +27,14 @@ Board::Board(std::string f) {
  */
 void Board::movePiece(Move m) {
 	bool color = (*this)(m.getOrigC(), m.getOrigR()).getPiece().getColor();
-	// need to destroy destination if occupied to prevent memory leak
-	if ((*this)(m.getDestC(), m.getDestR())) {
-		// but only if opposing piece
-		if ((*this)(m.getDestC(), m.getDestR()).getPiece().getColor() != color) {
-			/**
-			 * Tile::reset() is an explicit destructor as we want specific
-			 * logic for when a tile is destroyed but also to only
-			 * be able to call it explicitly rather than implicit default
-			 */
-			(*this)(m.getDestC(), m.getDestR()).reset();
-		}
+	Tile destMove = (*this)(m.getDestC(), m.getDestR());
+	if (destMove && destMove.getPiece().getColor() != color) {
+		/**
+		 * Tile::reset() is an explicit destructor as we want specific
+		 * logic for when a tile is destroyed but also to only
+		 * be able to call it explicitly rather than implicit default
+		 */
+		(*this)(m.getDestC(), m.getDestR()).reset();
 	}
 	// make a new copy of the origin tile and insert into destination tile
 	switch((*this)(m.getOrigC(), m.getOrigR()).getPiece().getType()) {
@@ -64,8 +63,8 @@ void Board::movePiece(Move m) {
 			 * castling handler
 			 * short circuit in case tile is empty
 			 */
-			if ((*this)(m.getDestC(), m.getDestR())
-			&& (*this)(m.getDestC(), m.getDestR()).getPiece().getType() == ((color) ? 'R' : 'r')) {
+			char idealColor = ((color) ? 'R' : 'r');
+			if (destMove && destMove.getPiece().getType() == idealColor) {
 				// init new pieces in correct positions
 				(*this)(m.getDestC(), m.getDestR()) = new King(color);
 				(*this)(m.getOrigC(), m.getOrigR()) = new Rook(color);
@@ -196,8 +195,8 @@ bool Board::determineCheck(bool c) {
 	// for each of those moves
 	for (unsigned int i = 0; i < moveList.size(); i++) {
 		// compare the destination to see if it coincides with king
-		Tile possibleMove = (*this)(moveList[i].getDestC(), moveList[i].getDestR());
-		if (possibleMove && possibleMove.getPiece().getType() == ((c) ? 'K' : 'k')) {
+		Tile t = (*this)(moveList[i].getDestC(), moveList[i].getDestR());
+		if (t && t.getPiece().getType() == ((c) ? 'K' : 'k')) {
 			return true;
 		}
 	}
@@ -245,12 +244,14 @@ std::vector<Move> Board::getAllMoves(bool c) {
 	for (unsigned int i = 0; i < COLS; i++) {
 		for (unsigned int j = 0; j < ROWS; j++) {
 			// short circuit in case non-occupied tile or wrong color
-			if (!(*this)(j, i) || (*this)(j, i).getPiece().getColor() == c) { continue; }
+			if (!(*this)(j, i) || (*this)(j, i).getPiece().getColor() == c) {
+				continue;
+			}
 			// collect moves from tiled piece
-			std::vector<Move> moves = (*this)(j, i).getPiece().getMoves(this, j, i);
-			for (unsigned int k = 0; k < moves.size(); k++) {
+			std::vector<Move> m = (*this)(j,i).getPiece().getMoves(this, j, i);
+			for (unsigned int k = 0; k < m.size(); k++) {
 				// append those moves to the master list
-				moveList.push_back(moves[k]);
+				moveList.push_back(m[k]);
 			}
 		}
 	}
@@ -269,14 +270,18 @@ std::vector<Move> Board::getAllNonKingMoves(bool c) {
 	for (unsigned int i = 0; i < COLS; i++) {
 		for (unsigned int j = 0; j < ROWS; j++) {
 			// short circuit in case non-occupied tile or wrong color
-			if (!(*this)(j, i) || (*this)(j, i).getPiece().getColor() == c) { continue; }
+			if (!(*this)(j, i) || (*this)(j, i).getPiece().getColor() == c) {
+				continue;
+			}
 			// disregard kings as legally they cannot be next to each other
-			if ((*this)(j, i).getPiece().getType() == ((c) ? 'k' : 'K')) { continue; }
+			if ((*this)(j, i).getPiece().getType() == ((c) ? 'k' : 'K')) {
+				continue;
+			}
 			// collect moves from tiled piece
-			std::vector<Move> moves = (*this)(j, i).getPiece().getMoves(this, j, i);
-			for (unsigned int k = 0; k < moves.size(); k++) {
+			std::vector<Move> m = (*this)(j,i).getPiece().getMoves(this, j, i);
+			for (unsigned int k = 0; k < m.size(); k++) {
 				// append those moves to the master list
-				moveList.push_back(moves[k]);
+				moveList.push_back(m[k]);
 			}
 		}
 	}
@@ -314,13 +319,12 @@ int Board::getAllMobilityValues(bool c) {
 	int count = 0;
 	for (unsigned int i = 0; i < COLS; i++) {
 		for (unsigned int j = 0; j < ROWS; j++) {
-			if ((*this)(j, i)) {
-				// if piece exists and right color
-				if ((*this)(j, i).getPiece().getColor() == c) {
-					count += (*this)(j, i).getPiece().getMoves(this, j, i).size();
-				} else {
-					count -= (*this)(j, i).getPiece().getMoves(this, j, i).size();
-				}
+			if (!(*this)(j, i)) { continue; } // only if piece exists
+			// if piece exists and right color
+			if ((*this)(j, i).getPiece().getColor() == c) {
+				count += (*this)(j, i).getPiece().getMoves(this, j, i).size();
+			} else {
+				count -= (*this)(j, i).getPiece().getMoves(this, j, i).size();
 			}
 		}
 	}
@@ -478,5 +482,10 @@ void Board::setCurrentPlayer(bool c) { currentPlayer = c; }
 bool Board::getCurrentPlayer() { return currentPlayer; }
 
 // operator methods
-Tile& Board::operator()(unsigned int c, unsigned int r) { return tiles[c][r]; }
-Tile const& Board::operator()(unsigned int c, unsigned int r) const { return tiles[c][r]; }
+Tile& Board::operator()(unsigned int c, unsigned int r) {
+	return tiles[c][r];
+}
+
+Tile const& Board::operator()(unsigned int c, unsigned int r) const {
+	return tiles[c][r];
+}

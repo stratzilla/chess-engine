@@ -2,6 +2,7 @@
 
 /**
  * Human class definition
+ * defines behavior of the human controller player
  */
 
 /**
@@ -18,6 +19,7 @@ Human::Human(bool c) {
  */
 Move Human::promptMove() {
 	std::string s;
+	// get all available moves
 	std::vector<Move> moveList = getBoard()->getAllMoves(!getColor());
 	removeCheckedMoves(moveList);
 	while(true) { // continue prompting until valid
@@ -26,7 +28,7 @@ Move Human::promptMove() {
 		std::cout << "Or 'a1' to see moves (moves piece on a1 could make).\n";
 		std::cout << "Or \"save\" to save game, \"quit\" to quit game.\n";
 		std::cout << "Input: "; std::cin >> s;
-		// if not valid command
+		// if command length is invalid
 		if (s.size() != 2 && s.size() != 4) { errorMessage(1); continue; }
 		// if saving board state
 		if (s == "save") { saveBoard();	continue; }
@@ -39,7 +41,9 @@ Move Human::promptMove() {
 		// if don't own tile
 		if (!checkOwner(s[0]-97, s[1]-49)) { errorMessage(4); continue; }
 		// if command of size 2, show moves
-		if (s.size() == 2) { getBoard()->showMoves(s[0]-97, s[1]-49, moveList); continue; }
+		if (s.size() == 2) { 
+			getBoard()->showMoves(s[0]-97, s[1]-49, moveList); continue; 
+		}
 		// verify move is legal
 		Move m(s[0]-97, s[1]-49, s[2]-97, s[3]-49);
 		if (!verifyMove(m, moveList)) { errorMessage(5); continue; }
@@ -78,24 +82,23 @@ bool Human::verifyInput(std::string s) {
 	if (s[0] < 97 || s[0] > 104) { return false; }
 	// if origin row is valid
 	if (s[1] < 49 || s[1] > 56) { return false; }
-	if (s.size() == 4) {
+	if (s.size() == 4) { // for actual moves
 		// if destination column is valid
 		if (s[2] < 97 || s[2] > 104) { return false; }
 		// if destination row is valid
 		if (s[3] < 49 || s[3] > 56) { return false; }
-	} else { return true; }
+	}
 	return true;
 }
 
 /**
  * method to verify if move is legal
- * @param c - column of move
- * @param r - row of move
- * @param m - list of moves
+ * @param m - the proposed move
+ * @param l - list of moves
  * @return - whether move is valid
  */
 bool Human::verifyMove(Move m, std::vector<Move> l) {
-	// just verify the proposed move exists in the movelist
+	// verify the proposed move exists in the movelist
 	for (unsigned int i = 0; i < l.size(); i++) {
 		if (l[i] == m) { return true; }
 	}

@@ -16,7 +16,6 @@ class Board {
 		Tile tiles[8][8]; // how the board is organized		
 		bool currentPlayer;
 		
-		// for readability
 		const static bool WHITE = true, BLACK = false;
 		const static unsigned int A=0, B=1, C=2, D=3, E=4, F=5, G=6, H=7;
 		const static unsigned int COLS = 8, ROWS = 8;

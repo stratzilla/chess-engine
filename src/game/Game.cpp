@@ -22,7 +22,7 @@ void Game::play() {
 		// for custom boards, determine current player
 		if (getBoard()->getCurrentPlayer()) {
 			getBoard()->printBoard(); // print current board
-			// check if checkmate, check, or stalemate occurred
+			// check if checkmate, check, draw, or stalemate occurred
 			if (getBoard()->determineCheckmate(getPlayerWhite().getColor())) {
 				setGameState(2); break; 
 			}
