@@ -91,7 +91,9 @@ This strikes a decent balance between keeping/taking pieces, making room for AI 
 
 That is, <img src="https://latex.codecogs.com/png.latex?c_1" /> should be the largest coefficient by some bigger degree than <img src="https://latex.codecogs.com/png.latex?c_3" /> is to <img src="https://latex.codecogs.com/png.latex?c_2" />.
 
-It's useful to experiment because the heuristic can always be improved. Alternatively, you could design a genetic algorithm to find best coefficients.
+It's useful to experiment because the heuristic can always be improved. Alternatively, you could design a genetic algorithm to find best coefficients. 
+
+Currently, the defined heuristic may give some peculiar behavior (for example, sacrificing a queen if it encourages multiple pawns to progress ranks) but overall performs well. Any heuristic which has some consideration for material value will generally outperform a human opponent, but just barely: the other values are needed to give it more nuance as only considering material value doesn't make a convincing AI.
 
 # NegaMax/MiniMax Tree Search with Alpha-Beta Pruning
 
@@ -134,7 +136,9 @@ Some minor alterations to fit a chess engine are added to this, for example cons
 
 # Pruning beyond Alpha-Beta
 
-Besides alpha-beta pruning, the tree search is exhaustive but it doesn't need to be. Consider a branch node where the current board state is checkmate: this is a terminal case and there should be no future moves in branch nodes. The search algorithm evaluates branch nodes like this as a fixed value rather than recursing further to see more moves. Secondly, threefold repetition needs to be addressed with a move buffer: if the AI sees a branch node of a move which it has made within the last three moves, it needs to ignore this. Not only to prevent move reduplication but also to prune those branches.
+Besides alpha-beta pruning, the tree search is otherwise exhaustive but it doesn't need to be. Consider a branch node where the current board state is checkmate: this is a terminal case and there should be no future moves in branch nodes. The search algorithm evaluates branch nodes like this as a fixed value rather than recursing further to see more moves. Secondly, threefold repetition needs to be addressed with a move buffer: if the AI sees a branch node of a move which it has made within the last three moves, it needs to ignore this. Not only to prevent move reduplication but also to prune those branches.
+
+There was an attempt to keep board dumps and reference these scores to prune further branches. Dumping board states and score at every node in an `std::vector<std::string>` can let the AI reference these values were it to encounter a previously examined node. The problem is it is usually cheaper to recurse through branches rather than iterate over an `std::vector` which could be millions of elements large. I tried this method of further pruning and it was in fact slower than keeping it vanilla.
 
 # Performance
 
