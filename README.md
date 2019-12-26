@@ -54,7 +54,7 @@ Upon executing the program with correct arguments, a chessboard will appear. Cho
 
 # Chess Representation
 
-The engine respects the rule of chess with regards to movement with consideration for castling, piece promotion, capturing pieces, forcing the player to move out of check and inability to move into check. En passant is not implemented. Terminal board states are checkmate and stalemate although the AI will forfeit the match were it to have no confident moves to make.
+The engine respects the rule of chess with regards to movement with consideration for castling, piece promotion, capturing pieces, forcing the player to move out of check and inability to move into check. En passant is not implemented. Terminal board states are checkmate, draw, and stalemate although the AI will forfeit the match were it to have no confident moves to make.
 
 # Board Evaluation
 
@@ -132,7 +132,9 @@ function negamax(node, depth, α, β, player):
   return v
 ```
 
-Some minor alterations to fit a chess engine are added to this, for example considering moves which bring the AI or the player into check, stalemate, or checkmate.
+Some minor alterations to fit a chess engine are added to this, for example considering moves which bring the AI or the player into check, stalemate, or checkmate, etc.
+
+`negamax` is called by a broader `negamaxHandler` which performs the first level of NegaMax manually so it can investigate the score of first moves (and their effect on the board) and then return an ideal move. In practice, the tree structure of the game is less like a typical tree and rather multiple trees: each first move is a root node in its own tree. This means first moves can be evaluated and compared. This lends itself well to parallelization which I may implement in the future, potentially making the tree search 35x faster at best cases.
 
 # Pruning beyond Alpha-Beta
 
@@ -154,3 +156,5 @@ While the performance is system specific, using a depth of `[1, 4]` results in f
 | 6     | <38s       | <58s        | <21s      | <45s    |
 
 Beyond a depth of `6`, each move takes over a minute so I did not test. As for how the AI itself performs from a chess strategy standpoint: it relies heavily on appropriate heuristic evaluation coefficient choices. For the defined coefficients above, it is adequate and able to best myself at least.
+
+On average, a typical player has 35 possible moves to make which means the branching factor of the tree is, on average, 35. This becomes unbelievably complex with a deeper depth hence the exponential growth between depth choices. If paralellism is implemented by way of multithreaded tree searching, a depth of `7` may become reasonable, although for most people, a depth of `5` is generally adequate as a chess AI.
