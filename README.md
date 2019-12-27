@@ -88,7 +88,7 @@ This strikes a decent balance between keeping/taking pieces, making room for AI 
 
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%2C%20c_2%2C%20c_3%20%5Cin%20%5Cleft%5B1%2C%5Cinfty%5Cright%29" />
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%20%5Cgg%20c_3%20%3E%20c_2" />
-<img src="https://latex.codecogs.com/png.latex?%5Clarge%20103c_1%20&plus;%2064c_2%20&plus;%2048c_3%20%3C%205%5Ctimes10%5E7" />
+<img src="https://latex.codecogs.com/png.latex?%5Clarge%20103c_1%20&plus;%2064c_2%20&plus;%2048c_3%20%3C%202.5%5Ctimes10%5E7" />
 
 That is, <img src="https://latex.codecogs.com/png.latex?c_1" /> should be the largest coefficient by some bigger degree than <img src="https://latex.codecogs.com/png.latex?c_3" /> is to <img src="https://latex.codecogs.com/png.latex?c_2" />. As for the last condition: this is to confirm that the heuristic score does not exceed the value for checkmate. This is easy to abide by as the heuristic equation is reducible:
 
@@ -102,6 +102,8 @@ And so on. Any coefficient choice where there is a common factor between them ha
 It's useful to experiment because the heuristic can always be improved. Alternatively, you could design a genetic algorithm to find best coefficients. 
 
 Currently, the defined heuristic may give some peculiar behavior (for example, sacrificing a queen if it encourages multiple pawns to progress ranks) but overall performs well. Any heuristic which has some consideration for material value will generally outperform a human opponent, but just barely: the other values are needed to give it more nuance as only considering material value doesn't make a convincing AI.
+
+Refer to `Game/GameParams.hpp` for chess parameters including coefficients for heuristic evaluation.
 
 # NegaMax/MiniMax Tree Search with Alpha-Beta Pruning
 
