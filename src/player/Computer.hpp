@@ -1,5 +1,4 @@
 #include "Player.hpp"
-#include <math.h>
 #include <limits.h>
 #include <algorithm>
 
@@ -14,7 +13,7 @@ class Computer : public Player {
 		std::vector<std::string> buffer;
 		
 		// private member methods
-		Move negamaxHandler();
+		Move negamaxHandler(int, int);
 		int negamax(Board*, unsigned int, int, int, bool);
 		int evalBoard(Board*);
 		void printData(int, unsigned int);

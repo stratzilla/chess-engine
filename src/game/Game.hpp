@@ -1,4 +1,3 @@
-#include "../board/Board.hpp"
 #include "../player/Player.hpp"
 
 /**
@@ -9,7 +8,7 @@ class Game {
 		Board* gameboard; // the current board
 		Player* playerA; Player* playerB; // players
 		unsigned int gameState; // current game state
-		unsigned int moveCount = 0;
+		unsigned int moveCount = 1; // game move counter
 		
 		// private member methods
 		void whiteMove();

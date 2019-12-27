@@ -1,5 +1,4 @@
 #pragma once
-#include <sstream>
 #include <iostream>
 #include "../pieces/Piece.hpp"
 

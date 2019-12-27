@@ -21,6 +21,11 @@ namespace GameParams {
 	const static int Q_VAL = 9; // for queens
 	const static int K_VAL = 100; // for kings
 	
+	// game condition board evals
+	const static int CHECKMATE = 5000000;
+	const static int STALEMATE = 0;
+	const static int DRAW = 0;
+	
 	/**
 	 * default values
 		// heuristic evaluation coefficients
@@ -38,6 +43,11 @@ namespace GameParams {
 		const static int R_VAL = 5; // for rooks
 		const static int Q_VAL = 9; // for queens
 		const static int K_VAL = 100; // for kings
+		
+		// game condition board evals
+		const static int CHECKMATE = 5000000;
+		const static int STALEMATE = 0;
+		const static int DRAW = 0;
 	 *
 	 */
 }

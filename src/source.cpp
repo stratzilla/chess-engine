@@ -1,5 +1,4 @@
 #include "game/Game.hpp"
-#include "player/Player.hpp"
 #include "player/Human.hpp"
 #include "player/Computer.hpp"
 

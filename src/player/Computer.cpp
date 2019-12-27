@@ -21,7 +21,7 @@ Computer::Computer(bool c, unsigned int d) {
  * @return - the move they've chosen
  */
 Move Computer::promptMove() {
-	return negamaxHandler();
+	return negamaxHandler(INT_MIN, INT_MAX);
 }
 
 /**
@@ -29,9 +29,11 @@ Move Computer::promptMove() {
  * performs the first level of negamax
  * and compares the values of further calls to
  * generate the best move as dictated by the AI
+ * @param alf - alpha
+ * @param bet - beta
  * @return - optimal AI move
  */
-Move Computer::negamaxHandler() {
+Move Computer::negamaxHandler(int alf, int bet) {
 	// get all moves AI can make
 	std::vector<Move> moveList = getBoard()->getAllMoves(!getColor());
 	// remove moves which would put AI in check
@@ -55,7 +57,7 @@ Move Computer::negamaxHandler() {
 		Board* copy = new Board(*getBoard()); // make a new board copy
 		copy->movePiece(moveList[i]); // make move on copy
 		// find value of that move
-		int v = -negamax(copy, getDepth()-1, INT_MIN, INT_MAX, !getColor());
+		int v = -negamax(copy, getDepth()-1, -bet, -alf, !getColor());
 		delete copy;
 		// if same worth or not enough to fill queue
 		if (v == bestMoveValue || moveList.size() <= GameParams::BUFFER_SIZE) {
@@ -67,6 +69,10 @@ Move Computer::negamaxHandler() {
 			bestMoves.clear(); // don't need worse moves
 			bestMoves.push_back(moveList[i]);
 		}
+		// update alpha if better best move value
+		if (bestMoveValue > alf) { alf = bestMoveValue;	}
+		// prune further moves
+		if (alf >= bet) { break; }
 	}
 	/** 
 	 * unable to catch instances where the movelist is zero
@@ -75,7 +81,7 @@ Move Computer::negamaxHandler() {
 	if (bestMoves.size() == 0) {
 		std::cout << (getColor() ? "White" : "Black");
 		std::cout << " has forfeited the game.\n\n";
-		exit(1);
+		exit(0); // impossible to unwrap into main()
 	}
 	/**
 	 * because some moves will be worth the same as others, AI will have
@@ -110,19 +116,16 @@ int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 	int offset = (p == getColor() ? 1 : -1); // vary based on color
 	// terminal case would be stalemate or checkmate or depth zero
 	if (d == 0) { // base recursive case
-		// consider a checkmate as best possible configuration
-		if (b->determineCheckmate(p)) { return offset * INT_MAX; }
-		// consider a stalemate is better than losing
-		if (b->determineStalemate(p)) { return offset * (INT_MAX/2); }
-		// return that board's evaluation
-		if (b->determineDraw()) { return offset * (INT_MAX/2); }
-		// otherwise return the board value
 		return offset * evalBoard(b);
 	}
+	// consider a checkmate as worst possible configuration
+	if (b->determineCheckmate(p)) { return -GameParams::CHECKMATE; }
+	// consider a stalemate is better than losing
+	if (b->determineStalemate(p)) { return GameParams::STALEMATE; }
+	// return that board's evaluation
+	if (b->determineDraw()) { return GameParams::DRAW; }
 	// putting another person in check is beneficial
-	if (b->determineCheck(p)) {
-		return (2 * offset) * evalBoard(b); 
-	}
+	if (b->determineCheck(p)) {	return (2 * offset) * evalBoard(b); }
 	int value = INT_MIN; // initially minimum (will overwrite)
 	std::vector<Move> moveList = b->getAllMoves(!p); // get moves of opponent
 	for (unsigned int i = 0; i < moveList.size(); i++) {

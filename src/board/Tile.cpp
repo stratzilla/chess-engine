@@ -32,7 +32,6 @@ Tile& Tile::operator=(Piece* p) {
 Tile::operator bool() const { return occupant.get() != NULL; }
 
 std::ostream& operator<<(std::ostream &out, Tile &t) {
-	//std::cout << "aeiou" << t.occupant << "\n";
 	out << (t ? t.occupant.get()->getType() : ' ');
 	return out;
 }
