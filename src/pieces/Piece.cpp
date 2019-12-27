@@ -35,4 +35,4 @@ char Piece::getType() { return type; }
 
 // mutator methods
 void Piece::setMoved(bool m) { hasMoved = m; }
-void Piece::setType(char t) { type = (getColor() == 1) ? t : t + 32; }
+inline void Piece::setType(char t) { type = (getColor() == 1) ? t : t + 32; }

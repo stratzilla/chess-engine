@@ -5,7 +5,7 @@
 const bool WHITE = true, BLACK = false;
 
 // remind user of proper compilation and execution
-void printHelp() {
+inline void printHelp() {
 	std::cout << "\nCompile and execute the program as so:\n\n";
 	std::cout << " $ g++ source.cpp */*.cpp -o chess\n";
 	std::cout << " $ ./chess <args>\n\n";

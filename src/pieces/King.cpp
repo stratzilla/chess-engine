@@ -104,7 +104,7 @@ std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
  * @param b - the board the king is on
  * @param m - movelist to remove from
  */
-void King::removeSurroundingKings(Board* b, std::vector<Move> &m) {
+inline void King::removeSurroundingKings(Board* b, std::vector<Move> &m) {
 	std::vector<int> indexes;
 	for (unsigned int j = 0; j < m.size(); j++) {
 		for (unsigned int i = 0; i < MOVE_NUM; i++) {
@@ -142,7 +142,7 @@ void King::removeSurroundingKings(Board* b, std::vector<Move> &m) {
  * @param b - the board the king is on
  * @param m - movelist to remove moves from
  */
-void King::removeCheckedMoves(Board* b, std::vector<Move> &m) {
+inline void King::removeCheckedMoves(Board* b, std::vector<Move> &m) {
 	std::vector<int> indexes;
 	for (unsigned int i = 0; i < m.size(); i++) {
 		// make move on a copy and check if in check

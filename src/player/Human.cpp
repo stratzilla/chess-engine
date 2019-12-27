@@ -58,7 +58,7 @@ Move Human::promptMove() {
  * @param c, r - the coordinate to check
  * @return - whether that piece exists
  */
-bool Human::checkPiece(unsigned int c, unsigned int r) {
+inline bool Human::checkPiece(unsigned int c, unsigned int r) {
 	return (*getBoard())(c, r);
 }
 
@@ -68,7 +68,7 @@ bool Human::checkPiece(unsigned int c, unsigned int r) {
  * @param c, r - the coordinate to check
  * @return - whether piece at coords belongs to user
  */
-bool Human::checkOwner(unsigned int c, unsigned int r) {
+inline bool Human::checkOwner(unsigned int c, unsigned int r) {
 	return getColor() == (*getBoard())(c, r).getPiece().getColor();
 }
 
@@ -77,7 +77,7 @@ bool Human::checkOwner(unsigned int c, unsigned int r) {
  * @param s - the string input
  * @return - whether it's legal or not
  */
-bool Human::verifyInput(std::string s) {
+inline bool Human::verifyInput(std::string s) {
 	// if origin column is valid
 	if (s[0] < 97 || s[0] > 104) { return false; }
 	// if origin row is valid
@@ -97,7 +97,7 @@ bool Human::verifyInput(std::string s) {
  * @param l - list of moves
  * @return - whether move is valid
  */
-bool Human::verifyMove(Move m, std::vector<Move> l) {
+inline bool Human::verifyMove(Move m, std::vector<Move> l) {
 	// verify the proposed move exists in the movelist
 	for (unsigned int i = 0; i < l.size(); i++) {
 		if (l[i] == m) { return true; }
@@ -109,7 +109,7 @@ bool Human::verifyMove(Move m, std::vector<Move> l) {
  * method to handle errors from invalid inputs
  * @param i - the type of error
  */
-void Human::errorMessage(unsigned int i) {
+inline void Human::errorMessage(unsigned int i) {
 	std::cout << "\n";
 	switch(i) {
 		case 1: std::cout << "This is not a valid input.\n"; break;
@@ -122,7 +122,7 @@ void Human::errorMessage(unsigned int i) {
 }
 
 // method to handle game saving
-void Human::saveBoard() {
+inline void Human::saveBoard() {
 	std::string s;
 	std::cout << "\n";
 	while(true) { // continue prompting until valid
@@ -140,6 +140,6 @@ void Human::saveBoard() {
 }
 
 // method to handle game quitting
-void Human::quitGame() {
+inline void Human::quitGame() {
 	exit(0); // impossible to unwrap into main() unfortunately
 }
