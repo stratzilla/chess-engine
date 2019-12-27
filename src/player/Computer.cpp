@@ -58,7 +58,7 @@ Move Computer::negamaxHandler() {
 		int v = -negamax(copy, getDepth()-1, INT_MIN, INT_MAX, !getColor());
 		delete copy;
 		// if same worth or not enough to fill queue
-		if (v == bestMoveValue || moveList.size() <= BUFFER_SIZE) {
+		if (v == bestMoveValue || moveList.size() <= GameParams::BUFFER_SIZE) {
 			// add it to the collection
 			bestMoves.push_back(moveList[i]);
 		} else if (v > bestMoveValue) {
@@ -84,7 +84,9 @@ Move Computer::negamaxHandler() {
 	Move theBestMove = bestMoves[rand() % bestMoves.size()];
 	buffer.push_back(theBestMove.stateMove()); // add best move to buffer
 	// keep buffer size consistent
-	if (buffer.size() > BUFFER_SIZE) { buffer.erase(buffer.begin()); }
+	if (buffer.size() > GameParams::BUFFER_SIZE) {
+		buffer.erase(buffer.begin());
+	}
 	printData(bestMoveValue, bestMoves.size()); // show some data
 	return theBestMove;
 }
@@ -105,22 +107,21 @@ Move Computer::negamaxHandler() {
  */
 int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 	evalCount++; // increment count to display positions evaluated
+	int offset = (p == getColor() ? 1 : -1); // vary based on color
 	// terminal case would be stalemate or checkmate or depth zero
 	if (d == 0) { // base recursive case
-		/**
-		 * consider a checkmate as best possible configuration
-		 * this will become -INT_MAX were it the minimizing
-		 * player, so it handles both cases
-		 */
-		if (b->determineCheckmate(p)) { return INT_MAX; }
+		// consider a checkmate as best possible configuration
+		if (b->determineCheckmate(p)) { return offset * INT_MAX; }
 		// consider a stalemate is better than losing
-		if (b->determineStalemate(p)) { return 0; }
+		if (b->determineStalemate(p)) { return offset * (INT_MAX/2); }
 		// return that board's evaluation
-		return (p == getColor() ? 1 : -1) * evalBoard(b);
+		if (b->determineDraw()) { return offset * (INT_MAX/2); }
+		// otherwise return the board value
+		return offset * evalBoard(b);
 	}
 	// putting another person in check is beneficial
 	if (b->determineCheck(p)) {
-		return (p == getColor() ? 2 : -2) * evalBoard(b); 
+		return (2 * offset) * evalBoard(b); 
 	}
 	int value = INT_MIN; // initially minimum (will overwrite)
 	std::vector<Move> moveList = b->getAllMoves(!p); // get moves of opponent
@@ -158,7 +159,7 @@ int Computer::evalBoard(Board* b) {
 	 * some coefficients to balance the weights
 	 * of the various metrics about the board
 	 */
-	int c1 = 12, c2 = 1, c3 = 3;
+	int c1 = GameParams::C1, c2 = GameParams::C2, c3 = GameParams::C3;
 	return (c1*value) + (c2*mobility) + (c3*pawns);
 }
 

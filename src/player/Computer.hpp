@@ -11,7 +11,6 @@ class Computer : public Player {
 	private:
 		unsigned int depth;
 		unsigned int evalCount;
-		const static unsigned int BUFFER_SIZE = 3;
 		std::vector<std::string> buffer;
 		
 		// private member methods

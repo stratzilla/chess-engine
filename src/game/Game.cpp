@@ -61,20 +61,22 @@ void Game::play() {
 
 // white move function
 void Game::whiteMove() {
-	std::cout << "\nWhite to move...\n";
+	std::cout << "\nTurn " << moveCount << ", White to move...\n";
 	// get a move as prompted
 	Move m = getPlayerWhite().promptMove();
 	std::cout << "\nWhite has moved " << m << "\n";
 	makeMove(m); // make the move
+	moveCount++;
 }
 
 // black move function
 void Game::blackMove() {
-	std::cout << "\nBlack to move...\n";
+	std::cout << "\nTurn " << moveCount << ", Black to move...\n";
 	// get a move as prompted or AI generated
 	Move m = getPlayerBlack().promptMove();
 	std::cout << "\nBlack has moved " << m << "\n";
 	makeMove(m); // make the move
+	moveCount++;
 }
 
 /**

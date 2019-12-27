@@ -10,7 +10,7 @@
  * @param c - the color of the piece
  */
 Bishop::Bishop(bool c)
-	: Piece(c, 3, 'B') {} // chain into base class constructor
+	: Piece(c, GameParams::B_VAL, 'B') {} // chain into base constructor
 
 /**
  * explicit copy constructor

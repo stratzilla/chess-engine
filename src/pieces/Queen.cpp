@@ -10,7 +10,7 @@
  * @param c - the color of the piece
  */
 Queen::Queen(bool c)
-	: Piece(c, 9, 'Q') {} // chain into base class constructor
+	: Piece(c, GameParams::Q_VAL, 'Q') {} // chain into base constructor
 
 /**
  * explicit copy constructor

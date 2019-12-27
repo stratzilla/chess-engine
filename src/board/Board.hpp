@@ -1,5 +1,6 @@
 #pragma once
 #include "Tile.hpp"
+#include "../Game/GameParams.hpp"
 #include "../pieces/Knight.hpp"
 #include "../pieces/Bishop.hpp"
 #include "../pieces/Rook.hpp"

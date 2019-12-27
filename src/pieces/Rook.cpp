@@ -10,7 +10,7 @@
  * @param c - the color of the piece
  */
 Rook::Rook(bool c)
-	: Piece(c, 5, 'R') {} // chain into base class constructor
+	: Piece(c, GameParams::R_VAL, 'R') {} // chain into base constructor
 
 /**
  * explicit copy constructor

@@ -10,7 +10,7 @@
  * @param c - the color of the piece
  */
 Pawn::Pawn(bool c)
-	: Piece(c, 1, 'P') {} // chain into base class constructor
+	: Piece(c, GameParams::P_VAL, 'P') {} // chain into base constructor
 
 /**
  * explicit copy constructor

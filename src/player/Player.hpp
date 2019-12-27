@@ -1,5 +1,4 @@
 #pragma once
-#include "../game/Move.hpp"
 #include "../board/Board.hpp"
 
 /**

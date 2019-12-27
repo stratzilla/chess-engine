@@ -230,8 +230,8 @@ bool Board::determineDraw() {
 			}
 		}
 	}
-	// two kings would have board value 200
-	return (countKings == 200);
+	// two kings would have board value equal to two kings
+	return (countKings == 2 * GameParams::K_VAL);
 }
 
 /**
@@ -340,15 +340,18 @@ int Board::getAllPawnValues(bool c) {
 	int count = 0;
 	for (unsigned int i = 0; i < COLS; i++) {
 		for (unsigned int j = 0; j < ROWS; j++) {
-			// if piece exists and is pawn
-			if ((*this)(j, i) && (*this)(j, i).getPiece().getValue() == 1) {
-				// if matching color
-				if ((*this)(j, i).getPiece().getColor() == c) {
-					// white pawns are on second row initially
-					count += ((c == WHITE) ? i-1 : 6-i);
-				} else {
-					// black pawns are on seventh row initially
-					count -= ((c == WHITE) ? 6-i : i-1);
+			// if piece exists
+			if ((*this)(j, i)) {
+				// and is pawn
+				if ((*this)(j, i).getPiece().getValue() == GameParams::P_VAL) {
+					// if matching color
+					if ((*this)(j, i).getPiece().getColor() == c) {
+						// white pawns are on second row initially
+						count += ((c == WHITE) ? i-1 : 6-i);
+					} else {
+						// black pawns are on seventh row initially
+						count -= ((c == WHITE) ? 6-i : i-1);
+					}
 				}
 			}
 		}

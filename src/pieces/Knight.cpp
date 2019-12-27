@@ -10,7 +10,7 @@
  * @param c - the color of the piece
  */
 Knight::Knight(bool c)
-	: Piece(c, 3, 'N') {} // chain into base class constructor
+	: Piece(c, GameParams::N_VAL, 'N') {} // chain into base constructor
 
 /**
  * explicit copy constructor

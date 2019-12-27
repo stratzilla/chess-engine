@@ -9,6 +9,7 @@ class Game {
 		Board* gameboard; // the current board
 		Player* playerA; Player* playerB; // players
 		unsigned int gameState; // current game state
+		unsigned int moveCount = 0;
 		
 		// private member methods
 		void whiteMove();

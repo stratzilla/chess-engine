@@ -10,7 +10,7 @@
  * @param c - the color of the piece
  */
 King::King(bool c)
-	: Piece(c, 100, 'K') {} // chain into base class constructor
+	: Piece(c, GameParams::K_VAL, 'K') {} // chain into base constructor
 
 /**
  * explicit copy constructor
@@ -70,20 +70,20 @@ std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 			 * castling to the west needs three position checks
 			 */
 			for (unsigned int i = 1; i < ((j == 0) ? 4 : 5); ++i) {
-				Tile castlePath = (*b)(((j == 0) ? c+i : c-i), r);
+				Tile castle = (*b)(((j == 0) ? c+i : c-i), r);
 				// if path is not occupied but not at edge
-				if (!castlePath) {
+				if (!castle) {
 					continue; // continue as not edge tile
 				// if occupied but not at edge
 				} else if (i < ((j == 0) ? 3 : 4)) {
 					break; // there is some obstruction, castling not possible
 				}
 				// check if matching color
-				if (castlePath.getPiece().getColor() == getColor()) {
+				if (castle.getPiece().getColor() == getColor()) {
 					// check if rook
-					if (castlePath.getPiece().getValue() == 5) {
+					if (castle.getPiece().getValue() == GameParams::R_VAL) {
 						// only if the rook also has not moved
-						if (!castlePath.getPiece().getMoved()) {
+						if (!castle.getPiece().getMoved()) {
 							// if unmoved rook of same color, valid castle
 							Move castleMove(c, r, (j == 0) ? c+i : c-i, r);
 							moveList.push_back(castleMove);
@@ -124,7 +124,7 @@ void King::removeSurroundingKings(Board* b, std::vector<Move> &m) {
 				// if occupying piece is opposing color
 				if ((*b)(x, y).getPiece().getColor() != getColor()) {
 					// if piece is king
-					if ((*b)(x, y).getPiece().getValue() == 100) {
+					if ((*b)(x, y).getPiece().getValue() == GameParams::K_VAL) {
 						indexes.insert(indexes.begin(), j);
 					}
 				}
