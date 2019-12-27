@@ -14,10 +14,10 @@ class Piece {
 		Piece(bool, unsigned int, char); // constructor
 		
 		const static unsigned int ROWS = 8, COLS = 8;
-
-		bool hasMoved; // whether piece has moved or not (K, R)		
+	
 		bool color; // the color of the piece
 		unsigned int value; // the value of the piece
+		bool hasMoved; // whether piece has moved or not (K, R, P)	
 		char type; // what kind of piece it is
 		
 		// protected member methods

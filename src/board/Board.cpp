@@ -404,10 +404,10 @@ void Board::showMoves(unsigned int c, unsigned int r, std::vector<Move> m) {
 		if (m[i] <= dummyMove) { moveList.push_back(m[i]); }
 	}
 	// for easier machine reading, make a vector of coords
-	unsigned int moveCoords[moveList.size()][2];
+	std::vector<std::vector<int> > cords(moveList.size(), std::vector<int>(2));
 	for (unsigned int i = 0; i < moveList.size(); i++) {
-		moveCoords[i][0] = moveList[i].getDestC();
-		moveCoords[i][1] = moveList[i].getDestR();
+		cords[i][0] = moveList[i].getDestC();
+		cords[i][1] = moveList[i].getDestR();
 	}
 	std::cout << "\n     ";
 	for (unsigned int i = 0; i < COLS; i++) {
@@ -422,7 +422,7 @@ void Board::showMoves(unsigned int c, unsigned int r, std::vector<Move> m) {
 		std::cout << i << " |";
 		for (unsigned int j = 0; j < ROWS; j++) {
 			for (unsigned int k = 0; k < moveList.size(); k++) {
-				if (moveCoords[k][0] == j && moveCoords[k][1] == i-1) {
+				if (cords[k][0] == (int)j && cords[k][1] == (int)(i-1)) {
 					sb << "o" << (*this)(j, i-1) << "o|";
 					break;
 				}

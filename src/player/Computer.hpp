@@ -8,9 +8,10 @@
  */
 class Computer : public Player {
 	private:
-		unsigned int depth;
-		unsigned int evalCount;
-		std::vector<std::string> buffer;
+		unsigned int depth; // depth for tree search
+		unsigned int evalCount = 0; // number of states eval'd
+		unsigned int pruneCount = 0; // number of states pruned
+		std::vector<std::string> buffer; // move buffer
 		
 		// private member methods
 		Move negamaxHandler(int, int);

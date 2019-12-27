@@ -13,7 +13,6 @@
 Computer::Computer(bool c, unsigned int d) {
 	setColor(c);
 	setDepth(d);
-	evalCount = 0;
 }
 
 /**
@@ -72,7 +71,7 @@ Move Computer::negamaxHandler(int alf, int bet) {
 		// update alpha if better best move value
 		if (bestMoveValue > alf) { alf = bestMoveValue;	}
 		// prune further moves
-		if (alf >= bet) { break; }
+		if (alf >= bet) { pruneCount++; break; }
 	}
 	/** 
 	 * unable to catch instances where the movelist is zero
@@ -136,7 +135,7 @@ int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 		delete copy;
 		value = std::max(value, v);
 		alf = std::max(alf, value);
-		if (alf >= bet) { break; } // cutoff for branches
+		if (alf >= bet) { pruneCount++; break; } // cutoff for branches
 	}
 	return value;
 }
@@ -174,14 +173,15 @@ int Computer::evalBoard(Board* b) {
  * @param e - how many equivalent moves found
  */
 void Computer::printData(int s, unsigned int e) {
-	std::cout << "\n" << evalCount << " game states evaluated.\n";
+	std::cout << "\n" << evalCount << " game state(s) evaluated.\n";
+	std::cout << pruneCount << " game state(s) pruned along with their branches.\n";
 	if (e > 1) {
 		std::cout << "Found " << e << " equivalent moves;";
 		std::cout << " chose one stochastically.\n";
 	}
 	std::cout << (getColor() ? "White" : "Black");
 	std::cout << " chose a move with score " << s << ".\n";
-	evalCount = 0;
+	evalCount = 0; pruneCount = 0;
 }
 
 // accessor methods

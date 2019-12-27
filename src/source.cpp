@@ -35,10 +35,10 @@ int main(int argc, char** argv) {
 	// create two empty players, init later
 	Player* white; Player* black; Board* gameboard;
 	if (argc < 3 || argc > 4) { // if not enough arguments
-		printHelp(); return 0; 
+		printHelp(); return 1; 
 	} else {
 		// if invalid depth
-		if (atoi(argv[2]) < 1) { printHelp(); return 0; }
+		if (atoi(argv[2]) < 1) { printHelp(); return 1; }
 		unsigned int depth = atoi(argv[2]);
 		switch(atoi(argv[1])) { // determine type of game
 			case 1: 
@@ -53,21 +53,21 @@ int main(int argc, char** argv) {
 				white = new Computer(WHITE, depth);
 				black = new Computer(BLACK, depth);
 				break;
-			default: printHelp(); return 0;
+			default: printHelp(); return 1;
 		}
 		switch(argc) { // determine if custom or not
 			case 3: gameboard = new Board(); break; // default normal
 			case 4: { // custom board
 				std::ifstream file(argv[3]); // try to open file
 				// if file doesn't exist, this will proc
-				if (!file.is_open()) { printHelp(); file.close(); return 0; }
+				if (!file.is_open()) { printHelp(); file.close(); return 1; }
 				// otherwise init board
 				file.close();
 				gameboard = new Board(argv[3]); break; }
-			default: printHelp(); return 0;
+			default: printHelp(); return 1;
 		}
 		Game g(gameboard, white, black); // init game
 		g.play(); // play the game
 	}
-	return 1;
+	return 0;
 }

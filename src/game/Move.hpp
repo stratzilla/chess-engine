@@ -6,8 +6,8 @@
  */
 class Move {
 	private:
-		unsigned int origR, origC; // origin of move
-		unsigned int destR, destC; // destination of move
+		unsigned int origC, origR; // origin of move
+		unsigned int destC, destR; // destination of move
 	public:
 		Move(); // default constructor
 		// parameterized constructor
