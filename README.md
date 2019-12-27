@@ -88,8 +88,13 @@ This strikes a decent balance between keeping/taking pieces, making room for AI 
 
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%2C%20c_2%2C%20c_3%20%5Cin%20%5Cleft%5B1%2C%5Cinfty%5Cright%29" />
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%20%5Cgg%20c_3%20%3E%20c_2" />
+<img src="https://latex.codecogs.com/png.latex?%5Clarge%20103c_1%20&plus;%2064c_2%20&plus;%2048c_3%20%3C%205%5Ctimes10%5E7" />
 
-That is, <img src="https://latex.codecogs.com/png.latex?c_1" /> should be the largest coefficient by some bigger degree than <img src="https://latex.codecogs.com/png.latex?c_3" /> is to <img src="https://latex.codecogs.com/png.latex?c_2" />.
+That is, <img src="https://latex.codecogs.com/png.latex?c_1" /> should be the largest coefficient by some bigger degree than <img src="https://latex.codecogs.com/png.latex?c_3" /> is to <img src="https://latex.codecogs.com/png.latex?c_2" />. As for the last condition: this is to confirm that the heuristic score does not exceed the value for checkmate. This is easy to abide by as the heuristic equation is reducible:
+
+<img src="https://latex.codecogs.com/png.latex?%5Csmall%205c_1%20&plus;%205c_2%20&plus;%205c_3%20%5Cequiv%204c_1%20&plus;%204c_2%20&plus;%204c_3%20%5Cequiv%20%5Cdots%20%5Cequiv%20c_1%20&plus;%20c_2%20&plus;%20c_3" \>
+
+Any coefficient choice where there is a common factor between them has an impact equivalent to the reduced form of the heuristic equation. In other words, since the heuristic is a balance between values, an equal ratio between values, irrespective of the ratio, has identical heuristic performance.
 
 It's useful to experiment because the heuristic can always be improved. Alternatively, you could design a genetic algorithm to find best coefficients. 
 
