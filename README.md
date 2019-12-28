@@ -164,9 +164,10 @@ While the performance is system specific, using a depth of `[1, 4]` results in v
 | 4     | 396.9msec  | 354.8msec   | 121.1msec | 298.2msec |
 | 5     | 5.0sec     | 1.2sec      | 0.4sec    | 1.7sec    |
 | 6     | 13.9sec    | 24.5sec     | 10.2sec   | 22.6sec   |
+| 7     | 630.4sec   | 112.6sec    | 41.9sec   | 163.4sec  |
 
 This is using a Ryzen 3600 at stock speeds and 3000mhz DDR4 memory. The testing environment is within LXSS (Ubuntu) in Windows 10 x64. Data collected from averaging five AI vs AI games, combining both AI player move times. Early Game means the first 10% of moves, Late Game means the last 10% of moves, and Middle Game is the remainder.
 
-Beyond a depth of `6`, each move takes over a minute so I did not test. As for how the AI itself performs from a chess strategy standpoint: it relies heavily on appropriate heuristic evaluation coefficient choices. For the defined coefficients above, it is adequate and able to best myself at least.
+Beyond a depth of `7`, each move takes in excess of ten minutes, thus I did not test these depths. As for how the AI itself performs from a chess strategy standpoint: it relies heavily on appropriate heuristic evaluation coefficient choices. For the defined coefficients above, it is adequate and able to best myself at least.
 
-On average, a typical player has 35 possible moves to make which means the branching factor of the tree is, on average, 35. This becomes unbelievably complex with a deeper depth hence the exponential growth between depth choices. If paralellism is implemented by way of multithreaded tree searching, a depth of `7` or possibly even '8' may become reasonable, although for the average person, a depth of `5` is generally adequate as a chess AI.
+On average, a typical player has 35 possible moves to make which means the branching factor of the tree is, on average, 35. This becomes unbelievably complex with a deeper depth hence the exponential growth between depth choices. If paralellism is implemented by way of multithreaded tree searching, a depth of `7` or possibly even `8` may become reasonable, although for the average person, a depth of `5` is generally adequate as a chess AI.
