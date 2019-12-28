@@ -26,7 +26,7 @@ Move Human::promptMove() {
 		std::cout << "\n";
 		std::cout << "Enter a move in the form of 'a1b2' (from a1 to b2).\n";
 		std::cout << "Or 'a1' to see moves (moves piece on a1 could make).\n";
-		std::cout << "Or \"quit\" to quit game.\n";
+		std::cout << "Or \"quit\" to quit game.\n\n";
 		std::cout << "Input: "; std::cin >> s;
 		// if command length is invalid
 		if (s.size() != 2 && s.size() != 4) { errorMessage(1); continue; }
