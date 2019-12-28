@@ -17,30 +17,18 @@ Using `-O2` or `-O3` is advised. Execution as below:
 
 ` $ ./chess <args>`
 
-Where `<args>` is either two or three arguments:
+Where `<args>` is either no or two arguments:
 
-Using two arguments:
+Using no arguments presents a Human vs. Human game. But, using two arguments will involve the AI as one or more of the players:
 
 ```
  <arg1> - Type of Game
-  1. Human vs. Human
-  2. Human vs. Computer
+  1. Human vs. Computer
+  2. Computer vs. Human
   3. Computer vs. Computer
  <arg2> - Depth for Tree Search
   - some integer value >0
 ```
-
-Using three arguments:
-
-```
- <arg1> - Type of Game
- <arg2> - Depth for Tree Search
- <arg3> - Relative Path to Save File
-```
-
-Save files are stored as text files in `saves` directory. This will load a custom board state as that file describes. To test specific functionality, tests exist in `tests` and can showcase piece movement, castling, check, etc.
-
-Execute with no arguments to be reminded of compilation and argument requirements.
 
 # Dependencies
 
@@ -50,7 +38,7 @@ Execute with no arguments to be reminded of compilation and argument requirement
 
 # How to Play
 
-Upon executing the program with correct arguments, a chessboard will appear. Choose a move in the form of `a1b2` (for `a1` moves to `b2`), or just a single coordinate to display moves (for `a1`, this will display all moves the piece on `a1` could move). You can save the game or quit the game using commands `save` and `quit` respectively. As to how to play chess or play it effectively, I leave it as an exercise to the reader.
+Upon executing the program with correct arguments, a chessboard will appear. Choose a move in the form of `a1b2` (for `a1` moves to `b2`), or just a single coordinate to display moves (for `a1`, this will display all moves the piece on `a1` could move). You can quit the game using command `quit`. As to how to play chess or play it effectively, I leave it as an exercise to the reader.
 
 # Chess Representation
 

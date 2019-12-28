@@ -6,17 +6,9 @@
  * as well as some gameplay logic related to the board
  */
 
-// default board constructor
+// board constructor
 Board::Board() {
 	initNormalBoard();
-}
-
-/**
- * parameterized board constructor
- * @param f - the filename of the board to load
- */
-Board::Board(std::string f) {
-	initSavedBoard(f);
 }
 
 /**
@@ -113,42 +105,6 @@ void Board::initNormalBoard() {
 	(*this)(F, 1-1) = new Bishop(WHITE);
 	(*this)(G, 1-1) = new Knight(WHITE);
 	(*this)(H, 1-1) = new Rook(WHITE);
-}
-
-/**
- * method to create a custom board
- * @param f - the filename of file of the board
- */
-void Board::initSavedBoard(std::string f) {
-	std::ifstream file(f); // open file
-	char token; // to tokenize file
-	file >> token; // first token is current player
-	if (token == 'W') {
-		setCurrentPlayer(WHITE); // white current player
-	} else if (token == 'B') {
-		setCurrentPlayer(BLACK); // black current player
-	}
-	for (unsigned int i = 1; i < COLS+1; i++) {
-		for (unsigned int j = 0; j < ROWS; j++) {
-			file >> token; // get each token from file and init tile
-			switch(token) { // determine which piece it is and place it
-				case 'P': (*this)(j, ROWS-i) = new Pawn(WHITE); break;
-				case 'p': (*this)(j, ROWS-i) = new Pawn(BLACK); break;
-				case 'N': (*this)(j, ROWS-i) = new Knight(WHITE); break;
-				case 'n': (*this)(j, ROWS-i) = new Knight(BLACK); break;
-				case 'B': (*this)(j, ROWS-i) = new Bishop(WHITE); break;
-				case 'b': (*this)(j, ROWS-i) = new Bishop(BLACK); break;
-				case 'R': (*this)(j, ROWS-i) = new Rook(WHITE); break;
-				case 'r': (*this)(j, ROWS-i) = new Rook(BLACK); break;
-				case 'Q': (*this)(j, ROWS-i) = new Queen(WHITE); break;
-				case 'q': (*this)(j, ROWS-i) = new Queen(BLACK); break;
-				case 'K': (*this)(j, ROWS-i) = new King(WHITE); break;
-				case 'k': (*this)(j, ROWS-i) = new King(BLACK); break;
-				case '0': default: break;
-			}
-		}
-	}
-	file.close(); // make sure to close the file
 }
 
 /**
@@ -456,26 +412,6 @@ void Board::showMoves(unsigned int c, unsigned int r, std::vector<Move> m) {
 			std::cout << "\n";
 		}
 	}
-}
-
-/**
- * method to save current board as custom board file
- * @param s - the filename to use
- * @param c - the current player
- */
-void Board::saveToFile(std::string s, bool c) {
-	std::ofstream file(s);
-	file << (c ? 'W' : 'B') << '\n';
-	for (unsigned int i = 1; i < COLS+1; i++) {
-		for (unsigned int j = 0; j < ROWS; j++) {
-			if (!(*this)(j, ROWS-i)) {
-				file << '0'; continue;
-			}
-			file << (*this)(j, ROWS-i).getPiece().getType();
-		}
-		file << '\n';
-	}
-	file.close();
 }
 
 // accessor methods

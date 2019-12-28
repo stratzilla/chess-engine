@@ -13,7 +13,6 @@ class Human : public Player {
 		bool verifyMove(Move, std::vector<Move>);
 		bool checkOwner(unsigned int, unsigned int);
 		bool checkPiece(unsigned int, unsigned int);
-		void saveBoard();
 		void quitGame();
 	public:
 		Human(bool); // constructor

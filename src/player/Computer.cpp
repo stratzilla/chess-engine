@@ -135,7 +135,7 @@ int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 	int offset = (p == getColor() ? 1 : -1); // vary based on color
 	// terminal cases would be stalemate or checkmate or depth zero
 	if (d == 0) { return offset * evalBoard(b); }
-	// consider a checkmate as best possible move
+	// consider a checkmate as worst possible position
 	if (b->determineCheckmate(p)) { return -GameParams::CHECKMATE; }
 	// consider a stalemate as neither good or bad
 	if (b->determineStalemate(p)) { return GameParams::STALEMATE; }

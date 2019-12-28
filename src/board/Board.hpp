@@ -23,22 +23,23 @@ class Board {
 		
 		// private member methods
 		void initNormalBoard();
-		void initSavedBoard(std::string);
 		std::vector<Move> getAllNonKingMoves(bool);
 	public:
-		Board(); // default constructor
-		Board(std::string); // parameterized constructor
+		Board(); // constructor
 		
 		// public member methods
 		void printBoard();
 		void showMoves(unsigned int, unsigned int, std::vector<Move>);
 		void movePiece(Move);
-		void saveToFile(std::string, bool);
 		std::vector<Move> getAllMoves(bool);
+		
+		// determine board state
 		bool determineCheckmate(bool);
 		bool determineStalemate(bool);
 		bool determineCheck(bool);
 		bool determineDraw();
+		
+		// determine heuristic evaluation values
 		int getAllPieceValues(bool);
 		int getAllMobilityValues(bool);
 		int getAllPawnValues(bool);

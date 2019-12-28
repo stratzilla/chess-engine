@@ -26,12 +26,10 @@ Move Human::promptMove() {
 		std::cout << "\n";
 		std::cout << "Enter a move in the form of 'a1b2' (from a1 to b2).\n";
 		std::cout << "Or 'a1' to see moves (moves piece on a1 could make).\n";
-		std::cout << "Or \"save\" to save game, \"quit\" to quit game.\n";
+		std::cout << "Or \"quit\" to quit game.\n";
 		std::cout << "Input: "; std::cin >> s;
 		// if command length is invalid
 		if (s.size() != 2 && s.size() != 4) { errorMessage(1); continue; }
-		// if saving board state
-		if (s == "save") { saveBoard();	continue; }
 		// if quitting game
 		if (s == "quit") { quitGame(); }
 		// if invalid coordinates
@@ -117,26 +115,7 @@ inline void Human::errorMessage(unsigned int i) {
 		case 3: std::cout << "There is no piece there.\n"; break;
 		case 4: std::cout << "This piece is owned by the opponent.\n"; break;
 		case 5: std::cout << "This is an illegal move.\n"; break;
-		case 6: std::cout << "You must specify a filename.\n"; break;
 	}
-}
-
-// method to handle game saving
-inline void Human::saveBoard() {
-	std::string s;
-	std::cout << "\n";
-	while(true) { // continue prompting until valid
-		std::cout << "Enter name for save file.\n";
-		std::cout << "Filename: "; std::cin >> s;
-		// if no filename given
-		if (s.length() < 1) {
-			errorMessage(6);
-		// if filename given
-		} else { break; }
-		std::cout << "\n";
-	}
-	getBoard()->saveToFile(s, getColor());
-	std::cout << "\n";
 }
 
 // method to handle game quitting
