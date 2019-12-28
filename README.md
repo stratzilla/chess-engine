@@ -1,6 +1,6 @@
 # Chess Engine
 
-This is a basic CLI-based chess engine I designed and developed to better familiarize myself with object orientation and pointers in C++. I marathoned it out in the matter of five days and while it's not perfect, perhaps resembles the largest achievement in programming I've done as of writing this readme.
+This is a basic CLI-based chess engine I designed and developed to better familiarize myself with object orientation and pointers in C++. I marathoned it out in the matter of five days and while it's not perfect, is adequate as an exercise in chess learning. It uses NegaMax tree search with Alpha-Beta pruning.
 
 # Compilation and Execution
 
@@ -103,7 +103,7 @@ It's useful to experiment because the heuristic can always be improved. Alternat
 
 Currently, the defined heuristic may give some peculiar behavior (for example, sacrificing a queen if it encourages multiple pawns to progress ranks) but overall performs well. Any heuristic which has some consideration for material value will generally outperform a human opponent, but just barely: the other values are needed to give it more nuance as only considering material value doesn't make a convincing AI.
 
-Refer to `Game/GameParams.hpp` for chess parameters including coefficients for heuristic evaluation.
+Refer to `game/GameParams.hpp` for chess parameters including coefficients for heuristic evaluation.
 
 # NegaMax/MiniMax Tree Search with Alpha-Beta Pruning
 
