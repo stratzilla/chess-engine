@@ -2,6 +2,12 @@
 
 This is a basic CLI-based chess engine I designed and developed to better familiarize myself with object orientation and pointers in C++. It is not exceptional and rather than acting as a fully fledged chess engine, it was moreso an exercise for myself to learn more about chess and game tree decisions in general.
 
+# Dependencies
+
+- gcc/g++
+- C++ (support for C++11 or higher, may need `-std=c++11` flag
+- GNU/Linux
+
 # Compilation and Execution
 
 You can clone these files to your computer with the below:
@@ -29,12 +35,6 @@ Using no arguments presents a Human vs. Human game. But, using two arguments wil
  <arg2> - Depth for Tree Search
   - some integer value >0
 ```
-
-# Dependencies
-
-- gcc/g++
-- C++ (support for C++11 or higher, may need `-std=c++11` flag
-- GNU/Linux
 
 # How to Play
 
@@ -159,3 +159,9 @@ This is using a Ryzen 3600 at stock speeds and 3000mhz DDR4 memory. The testing 
 Beyond a depth of `7`, each move takes in excess of ten minutes, thus I did not test these depths. As for how the AI itself performs from a chess strategy standpoint: it relies heavily on appropriate heuristic evaluation coefficient choices. For the defined coefficients above, it is adequate and able to best myself at least.
 
 On average, a typical player has 35 possible moves to make which means the branching factor of the tree is, on average, 35. This becomes unbelievably complex with a deeper depth hence the exponential growth between depth choices. If paralellism is implemented by way of multithreaded tree searching, a depth of `7` or possibly even `8` may become reasonable, although for the average person, a depth of `5` is generally adequate as a chess AI.
+
+# Screenshots
+
+<img src="https://github.com/stratzilla/chess-engine/blob/master/img/instructions.png" width="15%"/> <img src="https://github.com/stratzilla/chess-engine/blob/master/img/initial.png" width="15%"/> <img src="https://github.com/stratzilla/chess-engine/blob/master/img/movepreview.png" width="15%"/> <img src="https://github.com/stratzilla/chess-engine/blob/master/img/aiplaying.png" width="15%"/> <img src="https://github.com/stratzilla/chess-engine/blob/master/img/checkmate.png" width="15%"/>
+
+From L-to-R: instructions for compilation and execution, initial game display, move display (Qa4), two AI players playing a game, one player checkmates another.
