@@ -135,14 +135,14 @@ int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 	int offset = (p == getColor() ? 1 : -1); // vary based on color
 	// terminal cases would be stalemate or checkmate or depth zero
 	if (d == 0) { return offset * evalBoard(b); }
-	// consider a checkmate as worst possible configuration
-	if (b->determineCheckmate(p)) { return -GameParams::CHECKMATE; }
-	// consider a stalemate is better than losing
-	if (b->determineStalemate(p)) { return GameParams::STALEMATE; }
-	// return that board's evaluation
+	// consider a checkmate as best possible move
+	if (b->determineCheckmate(!p)) { return GameParams::CHECKMATE; }
+	// consider a stalemate as neither good or bad
+	if (b->determineStalemate(!p)) { return GameParams::STALEMATE; }
+	// likewise for draw
 	if (b->determineDraw()) { return GameParams::DRAW; }
 	// putting another person in check is beneficial
-	if (b->determineCheck(p)) {
+	if (b->determineCheck(!p)) {
 		return (GameParams::CHECK * offset) * evalBoard(b); 
 	}
 	int value = INT_MIN; // initially minimum (will overwrite)
