@@ -138,8 +138,6 @@ Some minor alterations to fit a chess engine are added to this, for example cons
 
 Besides alpha-beta pruning, the tree search is otherwise exhaustive but it doesn't need to be. Consider a branch node where the current board state is checkmate: this is a terminal case and there should be no future moves in branch nodes. The search algorithm evaluates branch nodes like this as a fixed value rather than recursing further to see more moves. Secondly, threefold repetition needs to be addressed with a move buffer: if the AI sees a branch node of a move which it has made within the last three moves, it needs to ignore this. Not only to prevent move reduplication but also to prune those branches. AI forfeiture is a possibility in the late game as it runs out of viable moves when considering the buffer.
 
-There was an attempt to keep board dumps and reference these scores to prune further branches. Dumping board states and score at every node in an `std::vector<std::string>` can let the AI reference these values were it to encounter a previously examined node. The problem is it is usually cheaper to recurse through branches rather than iterate over an `std::vector` which could be millions of elements large. I tried this method of further pruning and it was in fact slower than keeping it vanilla. This is a "poor" version of transposition tables and I may implement proper tables in the future.
-
 # Performance
 
 While the performance is system specific, using a depth of `[1, 4]` results in very speedy AI decision and with a depth of `5` having adequate speed. The program can accept any depth greater than `0`, although the depth which NegaMax search uses is one plus this number (eg. using a depth of `1` searches 1 ply beyond available moves). Timing for moves is below:
@@ -158,7 +156,15 @@ This is using a Ryzen 3600 at stock speeds and 3000mhz DDR4 memory. The testing 
 
 Beyond a depth of `7`, each move takes in excess of ten minutes, thus I did not test these depths. As for how the AI itself performs from a chess strategy standpoint: it relies heavily on appropriate heuristic evaluation coefficient choices. For the defined coefficients above, it is adequate and able to best myself at least.
 
+# Future
+
 On average, a typical player has 35 possible moves to make which means the branching factor of the tree is, on average, 35. This becomes unbelievably complex with a deeper depth hence the exponential growth between depth choices. If paralellism is implemented by way of multithreaded tree searching, a depth of `7` or possibly even `8` may become reasonable, although for the average person, a depth of `5` is generally adequate as a chess AI.
+
+Usually, the early game is the most taxing as there are an abundance of pieces to check moves for. A dictionary of starting moves may make this aspect of the game quicker at least.
+
+There was an attempt to keep board dumps and reference these scores to prune further branches. Dumping board states and score at every node in an `std::vector<std::string>` can let the AI reference these values were it to encounter a previously examined node. The problem is it is usually cheaper to recurse through branches rather than iterate over an `std::vector` which could be millions of elements large. I tried this method of further pruning and it was in fact slower than keeping it vanilla. This is a "poor" version of transposition tables and I may implement proper tables in the future along with Zobrist hashing.
+
+A GUI may be nice, possibly use nodejs to interface with the C++ "backend". This program was never intended for, nor designed with in mind, a GUI, but if I get an off day in the future I might revisit this idea.
 
 # Screenshots
 
