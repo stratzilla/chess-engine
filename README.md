@@ -72,24 +72,19 @@ And so on. Some experimentation is needed to find a good balance between coeffic
 
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20h%20%3D%2012%20%5Ctimes%20v_%7B%5Ctext%7Bmaterial%7D%7D%20&plus;%201%20%5Ctimes%20v_%7B%5Ctext%7Bmobility%7D%7D%20&plus;%203%20%5Ctimes%20v_%7B%5Ctext%7Bpawn%20rank%7D%7D" />
 
-This strikes a decent balance between keeping/taking pieces, making room for AI while removing other player opportunity to move, and moving pawns to get promotion. In general, I find the below is useful in finding good coefficients:
+This strikes a decent balance between keeping/taking pieces, making room for AI while removing other player opportunity to move, and moving pawns to get promotion. Currently, the defined heuristic may give some peculiar behavior (for example, sacrificing a queen if it encourages multiple pawns to progress ranks) but overall performs well. Any heuristic which has some consideration for material value will generally outperform a human opponent, but just barely: the other values are needed to give it more nuance as only considering material value doesn't make a convincing AI. It's useful to experiment because the heuristic can always be improved. Alternatively, you could design a genetic algorithm to find best coefficients. In general, however, I find the below is useful in finding good coefficients:
 
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%2C%20c_2%2C%20c_3%20%5Cin%20%5Cleft%5B1%2C%5Cinfty%5Cright%29" />
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%20%5Cgg%20c_3%20%3E%20c_2" />
-<img src="https://latex.codecogs.com/png.latex?%5Clarge%20103c_1%20&plus;%2064c_2%20&plus;%2048c_3%20%3C%202.5%5Ctimes10%5E7" />
 
-That is, <img src="https://latex.codecogs.com/png.latex?c_1" /> should be the largest coefficient by some bigger degree than <img src="https://latex.codecogs.com/png.latex?c_3" /> is to <img src="https://latex.codecogs.com/png.latex?c_2" />. As for the last condition: this is to confirm that the heuristic score does not exceed the value for checkmate. This is easy to abide by as the heuristic equation is reducible:
+That is, <img src="https://latex.codecogs.com/png.latex?c_1" /> should be the largest coefficient by some bigger degree than <img src="https://latex.codecogs.com/png.latex?c_3" /> is to <img src="https://latex.codecogs.com/png.latex?c_2" />. The equation is reducible as it represents the ratio of what the AI deems important. For example:
 
 <img src="https://latex.codecogs.com/png.latex?c_1%3Ac_2%3Ac_3%20%3D%205%3A5%3A5%20%5Cequiv%201%3A1%3A1" />
 <img src="https://latex.codecogs.com/png.latex?c_1%3Ac_2%3Ac_3%20%3D%204%3A2%3A2%20%5Cequiv%202%3A1%3A1" />
 <img src="https://latex.codecogs.com/png.latex?c_1%3Ac_2%3Ac_3%20%3D%2015%3A3%3A6%20%5Cequiv%205%3A1%3A2" />
 <img src="https://latex.codecogs.com/png.latex?c_1%3Ac_2%3Ac_3%20%3D%2018%3A27%3A36%20%5Cequiv%202%3A3%3A4" />
 
-And so on. Any coefficient choice where there is a common factor between them has an impact equivalent to the reduced form of the heuristic equation. In other words, since the heuristic is a balance between values, an equal ratio between values, irrespective of the ratio, has identical heuristic performance. Consider reducing the coefficients as much as possible to remain below the threshold for checkmate score.
-
-It's useful to experiment because the heuristic can always be improved. Alternatively, you could design a genetic algorithm to find best coefficients. 
-
-Currently, the defined heuristic may give some peculiar behavior (for example, sacrificing a queen if it encourages multiple pawns to progress ranks) but overall performs well. Any heuristic which has some consideration for material value will generally outperform a human opponent, but just barely: the other values are needed to give it more nuance as only considering material value doesn't make a convincing AI.
+And so on. Any coefficient choice where there is a common factor between them has an impact equivalent to the reduced form of the heuristic equation. In other words, since the heuristic is a balance between values, an equal ratio between values, irrespective of the ratio, has identical heuristic performance. Consider reducing the coefficients as much as possible or some undefined behavior may arise (for example, a checkmate is evaluated as `5000000`: using needlessly high coefficients might mean a board evaluation exceeds this).
 
 Refer to `game/GameParams.hpp` for chess parameters including coefficients for heuristic evaluation.
 
