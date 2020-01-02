@@ -72,7 +72,9 @@ And so on. Some experimentation is needed to find a good balance between coeffic
 
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20h%20%3D%2012%20%5Ctimes%20v_%7B%5Ctext%7Bmaterial%7D%7D%20&plus;%201%20%5Ctimes%20v_%7B%5Ctext%7Bmobility%7D%7D%20&plus;%203%20%5Ctimes%20v_%7B%5Ctext%7Bpawn%20rank%7D%7D" />
 
-This strikes a decent balance between keeping/taking pieces, making room for AI while removing other player opportunity to move, and moving pawns to get promotion. Currently, the defined heuristic may give some peculiar behavior (for example, sacrificing a queen if it encourages multiple pawns to progress ranks) but overall performs well. Any heuristic which has some consideration for material value will generally outperform a human opponent, but just barely: the other values are needed to give it more nuance as only considering material value doesn't make a convincing AI. It's useful to experiment because the heuristic can always be improved. Alternatively, you could design a genetic algorithm to find best coefficients. In general, however, I find the below is useful in finding good coefficients:
+This strikes a decent balance between keeping/taking pieces, making room for AI while removing other player opportunity to move, and moving pawns to get promotion. Currently, the defined heuristic may give some peculiar behavior (for example, sacrificing a queen if it encourages multiple pawns to progress ranks) but overall performs well. 
+
+Any heuristic which has some consideration for material value will generally outperform a human opponent, but just barely: the other values are needed to give it more nuance as only considering material value doesn't make a convincing AI. It's useful to experiment because the heuristic can always be improved. Alternatively, you could design a genetic algorithm to find best coefficients. In general, however, I find the below is useful in finding good coefficients:
 
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%2C%20c_2%2C%20c_3%20%5Cin%20%5Cleft%5B1%2C%5Cinfty%5Cright%29" />
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%20%5Cgg%20c_3%20%3E%20c_2" />
