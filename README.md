@@ -86,7 +86,7 @@ That is, <img src="https://latex.codecogs.com/png.latex?c_1" /> should be the la
 <img src="https://latex.codecogs.com/png.latex?c_1%3Ac_2%3Ac_3%20%3D%2015%3A3%3A6%20%5Cequiv%205%3A1%3A2" />
 <img src="https://latex.codecogs.com/png.latex?c_1%3Ac_2%3Ac_3%20%3D%2018%3A27%3A36%20%5Cequiv%202%3A3%3A4" />
 
-And so on. Any coefficient choice where there is a common factor between them has an impact equivalent to the reduced form of the heuristic equation. In other words, since the heuristic is a balance between values, an equal ratio between values, irrespective of the ratio, has identical heuristic performance. Consider reducing the coefficients as much as possible or some undefined behavior may arise (for example, a checkmate is evaluated as `5000000`: using needlessly high coefficients might mean a board evaluation exceeds this).
+And so on. Any coefficient choice where there is a common factor between them has an impact equivalent to the reduced form of the heuristic equation. In other words, since the heuristic is a balance between values, an equal ratio between values, irrespective of the ratio, has identical heuristic performance. Consider reducing the coefficients as much as possible or some undefined behavior may arise (for example, so the heuristic score doesn't exceed `INT_MAX`).
 
 Refer to `game/GameParams.hpp` for chess parameters including coefficients for heuristic evaluation.
 
