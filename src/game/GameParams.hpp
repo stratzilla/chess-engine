@@ -44,10 +44,17 @@ namespace GameParams {
 	 * generally keep this the way it is, there's
 	 * no real need to change them
 	 */
-	const static int CHECKMATE = 50000000;
 	const static int STALEMATE = 0;
 	const static int DRAW = 0;
 	const static int CHECK = 2; // check is multiplicand
+	/**
+	 * concerning checkmate scoring, it needs to be greater
+	 * than any possible board evaluation. The highest
+	 * material score for one player is 103, mobility score is 215
+	 * and pawn control 48. Multiply these by the coefficients and
+	 * add one to ensure the evaluation is always highest for checkmate
+	 */
+	const static int CHECKMATE = ((C1*103) + (C2*215) + (C3*48)) + 1;
 	
 	/**
 	 * default values
@@ -62,7 +69,7 @@ namespace GameParams {
 		const static unsigned int R_VAL = 5;
 		const static unsigned int Q_VAL = 9;
 		const static unsigned int K_VAL = 100;
-		const static int CHECKMATE = 50000000;
+		const static int CHECKMATE = ((C1*103) + (C2*215) + (C3*48)) + 1;
 		const static int STALEMATE = 0;
 		const static int DRAW = 0;
 		const static int CHECK = 2;

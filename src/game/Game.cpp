@@ -19,43 +19,39 @@ Game::Game(Board* b, Player* white, Player* black)
 // main game playing method
 void Game::play() {
 	while(true) { // continue playing while game not over
-		// for custom boards, determine current player
-		if (getBoard()->getCurrentPlayer()) {
-			getBoard()->printBoard(); // print current board
-			// check if checkmate, check, draw, or stalemate occurred
-			if (getBoard()->determineCheckmate(getPlayerWhite().getColor())) {
-				setGameState(2); break; 
-			}
-			if (getBoard()->determineDraw()) { setGameState(1); break; }
-			if (getBoard()->determineStalemate(getPlayerWhite().getColor())) {
-				break;
-			}
-			if (getBoard()->determineCheck(getPlayerWhite().getColor())) {
-				std::cout << "\nWhite is in check!\n";
-			}
-			whiteMove(); // otherwise make a move
-		} else if (!getBoard()->getCurrentPlayer()) {
-			getBoard()->printBoard();
-			if (getBoard()->determineCheckmate(getPlayerBlack().getColor())) { 
-				setGameState(3); break;
-			}
-			if (getBoard()->determineStalemate(getPlayerBlack().getColor())) {
-				break;
-			}
-			if (getBoard()->determineDraw()) { setGameState(1); break; }
-			if (getBoard()->determineCheck(getPlayerBlack().getColor())) {
-				std::cout << "\nBlack is in check!\n";
-			}
-			blackMove();
+		// white move
+		getBoard()->printBoard(); // print current board
+		// check if checkmate, check, draw, or stalemate occurred
+		if (getBoard()->determineCheckmate(getPlayerWhite().getColor())) {
+			setGameState(3); break; 
 		}
-		// alternate player
-		getBoard()->setCurrentPlayer(!getBoard()->getCurrentPlayer());
+		if (getBoard()->determineDraw()) { setGameState(2); break; }
+		if (getBoard()->determineStalemate(getPlayerWhite().getColor())) {
+			setGameState(1); break;
+		}
+		if (getBoard()->determineCheck(getPlayerWhite().getColor())) {
+			std::cout << "\nWhite is in check!\n";
+		}
+		whiteMove(); // otherwise make a move
+		// black move
+		getBoard()->printBoard();
+		if (getBoard()->determineCheckmate(getPlayerBlack().getColor())) { 
+			setGameState(4); break;
+		}
+		if (getBoard()->determineStalemate(getPlayerBlack().getColor())) {
+			setGameState(1); break;
+		}
+		if (getBoard()->determineDraw()) { setGameState(2); break; }
+		if (getBoard()->determineCheck(getPlayerBlack().getColor())) {
+			std::cout << "\nBlack is in check!\n";
+		}
+		blackMove();
 	}
 	switch(getGameState()) { // if game is over
-		case 0: std::cout << "\nStalemate.\n\n"; break;
-		case 1: std::cout << "\nDraw.\n\n"; break;
-		case 2: std::cout << "\nBlack checkmates white.\n\n"; break;
-		case 3: std::cout << "\nWhite checkmates black.\n\n"; break;
+		case 1: std::cout << "\nStalemate.\n\n"; break;
+		case 2: std::cout << "\nDraw.\n\n"; break;
+		case 3: std::cout << "\nBlack checkmates white.\n\n"; break;
+		case 4: std::cout << "\nWhite checkmates black.\n\n"; break;
 	}
 }
 

@@ -15,7 +15,6 @@
 class Board {
 	private:
 		Tile tiles[8][8]; // how the board is organized		
-		bool currentPlayer; // the currently moving player
 		
 		const static bool WHITE = true, BLACK = false;
 		const static unsigned int A=0, B=1, C=2, D=3, E=4, F=5, G=6, H=7;
@@ -43,12 +42,6 @@ class Board {
 		int getAllPieceValues(bool);
 		int getAllMobilityValues(bool);
 		int getAllPawnValues(bool);
-		
-		// accessor methods
-		bool getCurrentPlayer();
-		
-		// mutator methods
-		void setCurrentPlayer(bool);
 		
 		// operator methods
 		Tile& operator()(unsigned int, unsigned int);

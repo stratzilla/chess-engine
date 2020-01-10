@@ -78,7 +78,6 @@ void Board::movePiece(Move m) {
 
 // method to create a standard positioned chess board
 void Board::initNormalBoard() {
-	setCurrentPlayer(WHITE); // white goes first
 	// back row black
 	(*this)(A, 8-1) = new Rook(BLACK);
 	(*this)(B, 8-1) = new Knight(BLACK);
@@ -413,12 +412,6 @@ void Board::showMoves(unsigned int c, unsigned int r, std::vector<Move> m) {
 		}
 	}
 }
-
-// accessor methods
-void Board::setCurrentPlayer(bool c) { currentPlayer = c; }
-
-// mutator methods
-bool Board::getCurrentPlayer() { return currentPlayer; }
 
 // operator methods
 Tile& Board::operator()(unsigned int c, unsigned int r) {
