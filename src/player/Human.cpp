@@ -1,13 +1,10 @@
 #include "Human.hpp"
 
-/**
- * Human class definition
- * defines behavior of the human controller player
- */
+// Human class definition, defines behavior of the human controller player
 
 /**
  * Human class constructor
- * @param c - the color of the player
+ * @param c		the color of the player
  */
 Human::Human(bool c) {
 	setColor(c);
@@ -15,7 +12,7 @@ Human::Human(bool c) {
 
 /**
  * method to prompt user for their move
- * @return - the move they've chosen
+ * @return		the move they've chosen
  */
 Move Human::promptMove() {
 	std::string s;
@@ -53,8 +50,9 @@ Move Human::promptMove() {
 
 /**
  * method to verify if a piece exists
- * @param c, r - the coordinate to check
- * @return - whether that piece exists
+ * @param c		the columnar coordinate of the piece
+ * @param r		the row coordinate of the piece
+ * @return		whether that piece exists
  */
 inline bool Human::checkPiece(unsigned int c, unsigned int r) {
 	return (*getBoard())(c, r);
@@ -62,9 +60,9 @@ inline bool Human::checkPiece(unsigned int c, unsigned int r) {
 
 /**
  * method to verify ownership of piece
- * @param c - the color of the user
- * @param c, r - the coordinate to check
- * @return - whether piece at coords belongs to user
+ * @param c		the columnar coordinate of the piece
+ * @param r		the row coordinate of the piece
+ * @return 		whether piece at coords belongs to user
  */
 inline bool Human::checkOwner(unsigned int c, unsigned int r) {
 	return getColor() == (*getBoard())(c, r).getPiece().getColor();
@@ -72,8 +70,8 @@ inline bool Human::checkOwner(unsigned int c, unsigned int r) {
 
 /**
  * method to verify the input is legal
- * @param s - the string input
- * @return - whether it's legal or not
+ * @param s		the string input
+ * @return		whether it's legal or not
  */
 inline bool Human::verifyInput(std::string s) {
 	// if origin column is valid
@@ -91,9 +89,9 @@ inline bool Human::verifyInput(std::string s) {
 
 /**
  * method to verify if move is legal
- * @param m - the proposed move
- * @param l - list of moves
- * @return - whether move is valid
+ * @param m		the proposed move
+ * @param l		list of moves
+ * @return		whether move is valid
  */
 inline bool Human::verifyMove(Move m, std::vector<Move> l) {
 	// verify the proposed move exists in the movelist
@@ -105,7 +103,7 @@ inline bool Human::verifyMove(Move m, std::vector<Move> l) {
 
 /**
  * method to handle errors from invalid inputs
- * @param i - the type of error
+ * @param i		the type of error
  */
 inline void Human::errorMessage(unsigned int i) {
 	std::cout << "\n";

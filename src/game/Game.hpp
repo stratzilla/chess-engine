@@ -1,8 +1,7 @@
 #include "../player/Player.hpp"
 
-/**
- * Game class declaration
- */
+// Game class declaration
+
 class Game {
 	private:
 		Board* gameboard; // the current board

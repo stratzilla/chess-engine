@@ -1,31 +1,29 @@
 #include "King.hpp"
 
-/**
- * King class definition
- * defines the behavior of King pieces
- */
+// King class definition, defines the behavior of King pieces
 
 /**
  * King constructor
- * @param c - the color of the piece
+ * @param c		the color of the piece
  */
 King::King(bool c)
 	: Piece(c, GameParams::K_VAL, 'K') {} // chain into base constructor
 
 /**
  * explicit copy constructor
- * @return - a copy of this object
+ * @return		a copy of this object
  */
 std::shared_ptr<Piece> King::clone() const {
 	return std::shared_ptr<Piece>(new King(*this));
 }
 
 /**
- * method to determine which moves this piece may make
- * creates a collection of valid moves the piece can make
- * @param b - the board the piece is on
- * @param c, r - the coordinate of the piece
- * @return - a collection of moves this piece may make
+ * method to determine which moves this piece may make, creates a collection of 
+ * valid moves the piece can make
+ * @param b		the board the piece is on
+ * @param c		the columnar coordinate of the piece
+ * @param r		the row coordinate of the piece
+ * @return		a collection of moves this piece may make
  */
 std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 	std::vector<Move> moveList;
@@ -57,17 +55,17 @@ std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 		}
 	}
 	/**
-	 * castling specific code separated as it 
-	 * does not follow normal movement pattern
+	 * castling specific code separated as it  does not follow normal movement 
+	 * pattern
 	 */
 	bool checkWhitePos = (getColor() && c == 4 && r == 0); // valid W pos
 	bool checkBlackPos = (!getColor() && c == 4 && r == 7); // valid B pos
 	if (!getMoved() && (checkWhitePos || checkBlackPos)) { // if first move
 		for (unsigned int j = 0; j < CASTLE_MOVE; j++) {
 			/**
-			 * castling to the east requires a check of
-			 * two positions between king and rook, whereas
-			 * castling to the west needs three position checks
+			 * castling to the east requires a check of two positions between
+			 * king and rook, whereas castling to the west needs three position 
+			 * checks
 			 */
 			for (unsigned int i = 1; i < ((j == 0) ? 4 : 5); ++i) {
 				Tile castle = (*b)(((j == 0) ? c+i : c-i), r);
@@ -101,8 +99,8 @@ std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 
 /**
  * method to remove moves which put king next to king
- * @param b - the board the king is on
- * @param m - movelist to remove from
+ * @param b		the board the king is on
+ * @param m		movelist to remove from
  */
 inline void King::removeSurroundingKings(Board* b, std::vector<Move> &m) {
 	std::vector<int> indexes;
@@ -139,8 +137,8 @@ inline void King::removeSurroundingKings(Board* b, std::vector<Move> &m) {
 
 /**
  * method to remove moves which would put king in check
- * @param b - the board the king is on
- * @param m - movelist to remove moves from
+ * @param b		the board the king is on
+ * @param m		movelist to remove moves from
  */
 inline void King::removeCheckedMoves(Board* b, std::vector<Move> &m) {
 	std::vector<int> indexes;

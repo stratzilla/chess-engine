@@ -1,10 +1,8 @@
 #pragma once
 #include "../board/Board.hpp"
 
-/**
- * Player class declaration
- * base class for derived players
- */
+// Player class declaration, base class for derived players
+
 class Player {
 	private:
 		Board* gameboard; // the board the player is playing

@@ -1,38 +1,33 @@
 #include "Pawn.hpp"
 
-/**
- * Pawn class definition
- * defines the behavior of Pawn pieces
- */
+// Pawn class definition, defines the behavior of Pawn pieces
 
 /**
  * Pawn constructor
- * @param c - the color of the piece
+ * @param c		the color of the piece
  */
 Pawn::Pawn(bool c)
 	: Piece(c, GameParams::P_VAL, 'P') {} // chain into base constructor
 
 /**
  * explicit copy constructor
- * @return - a copy of this object
+ * @return		a copy of this object
  */
 std::shared_ptr<Piece> Pawn::clone() const {
 	return std::shared_ptr<Piece>(new Pawn(*this));
 }
 
 /**
- * method to determine which moves this piece may make
- * creates a collection of valid moves the piece can make
- * @param b - the board the piece is on
- * @param c, r - the coordinate of the piece
- * @return - a collection of moves this piece may make
+ * method to determine which moves this piece may make, creates a collection of
+ * valid moves the piece can make
+ * @param b		the board the piece is on
+ * @param c		the columnar coordinate of the piece
+ * @param r		the row coordinate of the piece
+ * @return		a collection of moves this piece may make
  */
 std::vector<Move> Pawn::getMoves(Board* b, unsigned int c, unsigned int r) {
 	std::vector<Move> moveList;
-	/**
-	 * an offset is needed depending on color:
-	 * white moves north, black moves south
-	 */
+	// an offset is needed: white moves north, black moves south
 	int offset = (getColor() == WHITE) ? 1 : -1;
 	for (unsigned int i = 0; i < MOVE_NUM; i++) {
 		// moving two spaces is only available for a pawn's first move

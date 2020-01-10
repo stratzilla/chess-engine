@@ -1,9 +1,7 @@
 #include "Player.hpp"
 
-/**
- * Human class declaration
- * derived class from base Player class
- */
+// Human class declaration, derived class from base Player class
+
 class Human : public Player {
 	private:
 		// private member methods

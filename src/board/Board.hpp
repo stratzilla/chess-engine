@@ -9,9 +9,8 @@
 #include "../pieces/Pawn.hpp"
 #include <fstream>
 
-/**
- * Board class declaration
- */
+// Board class declaration
+
 class Board {
 	private:
 		Tile tiles[8][8]; // how the board is organized		

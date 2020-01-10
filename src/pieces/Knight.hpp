@@ -2,10 +2,8 @@
 #include "Piece.hpp"
 #include "../board/Board.hpp"
 
-/**
- * Knight class declaration
- * derived class from base Piece class
- */
+// Knight class declaration, derived class from base Piece class
+
 class Knight : public Piece {
 	private:
 		// the number of directions or moves

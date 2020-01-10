@@ -1,9 +1,8 @@
 #pragma once
 #include <sstream>
 
-/**
- * Move class declaration
- */
+// Move class declaration
+
 class Move {
 	private:
 		unsigned int origC, origR; // origin of move

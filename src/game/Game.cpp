@@ -1,14 +1,12 @@
 #include "Game.hpp"
 
-/**
- * Game class definition
- */
+// Game class definition
 
 /**
  * Game class constructor
- * @param b - the game board to use
- * @param white - the white player
- * @param black - the black player
+ * @param b			the game board to use
+ * @param white		the white player
+ * @param black		the black player
  */
 Game::Game(Board* b, Player* white, Player* black)
 	: gameboard(b), playerA(white), playerB(black), gameState(0) { 
@@ -77,7 +75,7 @@ inline void Game::blackMove() {
 
 /**
  * method to make the prompted move
- * @param m - the move to make
+ * @param m		the move to make
  */
 inline void Game::makeMove(Move m) {
 	getBoard()->movePiece(m);

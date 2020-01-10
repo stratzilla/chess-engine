@@ -5,10 +5,8 @@
 
 class Board; // forward declaration
 
-/**
- * Piece class declaration
- * base class for derived pieces
- */
+// Piece class declaration, base class for derived pieces
+
 class Piece {
 	protected:
 		Piece(bool, unsigned int, char); // constructor
@@ -23,12 +21,14 @@ class Piece {
 		// protected member methods
 		bool checkInBounds(unsigned int, unsigned int);
 	public:
-		virtual ~Piece(); // destructor	
+		virtual ~Piece(); // destructor
+		
 		// pure abstract copy constructor
 		virtual std::shared_ptr<Piece> clone() const=0;
 		
 		// public member methods
-		virtual std::vector<Move> getMoves(Board*, unsigned int, unsigned int)=0;
+		virtual std::vector<Move> getMoves(Board*, unsigned int, 
+										unsigned int)=0;
 		
 		// accessor methods
 		bool getMoved();

@@ -2,10 +2,8 @@
 #include "Piece.hpp"
 #include "../board/Board.hpp"
 
-/**
- * Rook class declaration
- * derived class from base Piece class
- */
+// Rook class declaration, derived class from base Piece class
+
 class Rook : public Piece {
 	private:
 		// the number of directions or moves

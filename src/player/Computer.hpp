@@ -2,10 +2,8 @@
 #include <limits.h>
 #include <algorithm>
 
-/**
- * Computer class declaration
- * derived class from base Player class
- */
+// Computer class declaration, derived class from base Player class
+
 class Computer : public Player {
 	private:
 		unsigned int depth; // depth for tree search

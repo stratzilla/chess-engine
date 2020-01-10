@@ -2,9 +2,8 @@
 #include <iostream>
 #include "../pieces/Piece.hpp"
 
-/**
- * Tile class declaration
- */
+// Tile class declaration
+
 class Tile {
 	private:
 		std::shared_ptr<Piece> occupant; // the occupying piece

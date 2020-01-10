@@ -2,10 +2,8 @@
 #include "Piece.hpp"
 #include "../board/Board.hpp"
 
-/**
- * Bishop class declaration
- * derived class from base Piece class
- */
+// Bishop class declaration, derived class from base Piece class
+
 class Bishop : public Piece {
 	private:
 		// the number of directions or moves

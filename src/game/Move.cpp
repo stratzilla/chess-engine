@@ -1,24 +1,21 @@
 #include "Move.hpp"
 
-/**
- * Move class definition
- * defines how moves are encapsulated and accessed
- */
+// Move class definition, defines how moves are encapsulated and accessed
 
 // Move default constructor
 Move::Move() {}
 
 /**
  * Move parameterized constructor
- * @param oC, oR - the origin of the move (col, row)
- * @param dC, dR - the destination of the move (col, row)
+ * @param oC, oR	the origin of the move (col, row)
+ * @param dC, dR	the destination of the move (col, row)
  */
 Move::Move(unsigned int oC, unsigned int oR, unsigned int dC, unsigned int dR)
 	: origC(oC), origR(oR), destC(dC), destR(dR) {}
 
 /**
  * method to create printable string of move
- * @return - the move concatenated to a string
+ * @return		the move concatenated to a string
  */
 std::string Move::stateMove() {
 	// this is for standard chess notation

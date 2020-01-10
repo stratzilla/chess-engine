@@ -2,10 +2,8 @@
 #include "Piece.hpp"
 #include "../board/Board.hpp"
 
-/**
- * Pawn class declaration
- * derived class from base Piece class
- */
+// Pawn class declaration, derived class from base Piece class
+
 class Pawn : public Piece {
 	private:
 		// the number of directions or moves

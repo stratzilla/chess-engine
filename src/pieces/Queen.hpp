@@ -2,10 +2,8 @@
 #include "Piece.hpp"
 #include "../board/Board.hpp"
 
-/**
- * Queen class declaration
- * derived class from base Piece class
- */
+// Queen class declaration, derived class from base Piece class
+
 class Queen : public Piece {
 	private:
 		// the number of directions or moves

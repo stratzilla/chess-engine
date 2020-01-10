@@ -1,8 +1,6 @@
 #include "Tile.hpp"
 
-/**
- * Tile class definition
- */
+// Tile class definition
 
 // constructors and destructors
 Tile::Tile() : occupant(NULL) {}
