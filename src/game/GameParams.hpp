@@ -54,7 +54,7 @@ namespace GameParams {
 	 * and pawn control 48. Multiply these by the coefficients and
 	 * add one to ensure the evaluation is always highest for checkmate
 	 */
-	const static int CHECKMATE = ((C1*103) + (C2*215) + (C3*48)) + 1;
+	const static int CHECKMATE = (2 * ((C1*103) + (C2*215) + (C3*48))) + 1;
 	
 	/**
 	 * default values
