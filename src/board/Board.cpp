@@ -13,7 +13,7 @@ Board::Board() {
 /**
  * method to move piece from one space to another, this method handles all
  * movement logic when player methods confirm moves are valid
- * @param m		the move to make
+ * @param m - the move to make
  */
 void Board::movePiece(Move m) {
 	bool color = (*this)(m.getOrigC(), m.getOrigR()).getPiece().getColor();
@@ -103,8 +103,8 @@ void Board::initNormalBoard() {
 
 /**
  * method to determine if a player is in checkmate
- * @param c		the player to check
- * @return		whether that player is checkmated
+ * @param c - the player to check
+ * @return - whether that player is checkmated
  */
 bool Board::determineCheckmate(bool c) {
 	if (determineCheck(c)) {
@@ -134,8 +134,8 @@ bool Board::determineCheckmate(bool c) {
 
 /**
  * method to determine if a color is in check
- * @param c		the color to check
- * @return		whether that player is in check
+ * @param c - the color to check
+ * @return - whether that player is in check
  */
 bool Board::determineCheck(bool c) {
 	// get all moves of opponent
@@ -153,8 +153,8 @@ bool Board::determineCheck(bool c) {
 
 /**
  * method to determine if a player is in stalemate
- * @param c		the player to check
- * @return		whether that player is in stalemate
+ * @param c - the player to check
+ * @return - whether that player is in stalemate
  */
 bool Board::determineStalemate(bool c) {
 	// cannot be in stalemate if in check
@@ -166,7 +166,7 @@ bool Board::determineStalemate(bool c) {
 
 /**
  * method to determine a draw has occurred
- * @return		whether a draw has occurred
+ * @return - whether a draw has occurred
  */
 bool Board::determineDraw() {
 	// determine if only the two kings exist
@@ -184,8 +184,8 @@ bool Board::determineDraw() {
 
 /**
  * method to find all moves possible
- * @param c		the color to look for
- * @return		a list of moves for player
+ * @param c - the color to look for
+ * @return - a list of moves for player
  */
 std::vector<Move> Board::getAllMoves(bool c) {
 	std::vector<Move> moveList; // master move list
@@ -209,8 +209,8 @@ std::vector<Move> Board::getAllMoves(bool c) {
 /**
  * method to find all moves possible except by K, a separate function is needed
  * to avoid infinite recursion when >1 king is on the board
- * @param c		the color to look for
- * @return		a list of moves for player
+ * @param c - the color to look for
+ * @return - a list of moves for player
  */
 std::vector<Move> Board::getAllNonKingMoves(bool c) {
 	std::vector<Move> moveList; // master move list
@@ -237,8 +237,8 @@ std::vector<Move> Board::getAllNonKingMoves(bool c) {
 
 /**
  * method to count the piece values of all pieces
- * @param c		the color to check pieces for values
- * @return		the total value of those colored pieces
+ * @param c - the color to check pieces for values
+ * @return - the total value of those colored pieces
  */
 int Board::getAllPieceValues(bool c) {
 	int count = 0;
@@ -259,8 +259,8 @@ int Board::getAllPieceValues(bool c) {
 
 /**
  * method to find mobility value of the board
- * @param c		the color to check for
- * @return		total mobility score
+ * @param c - the color to check for
+ * @return - total mobility score
  */
 int Board::getAllMobilityValues(bool c) {
 	int count = 0;
@@ -280,8 +280,8 @@ int Board::getAllMobilityValues(bool c) {
 
 /**
  * method to determine pawn control
- * @param c		the color to check for
- * @return		the total pawn control
+ * @param c - the color to check for
+ * @return - the total pawn control
  */
 int Board::getAllPawnValues(bool c) {
 	int count = 0;
@@ -337,9 +337,9 @@ void Board::printBoard() {
 
 /**
  * method to print a modified board showing possible moves for a piece
- * @param c		the columnar coordinate of the piece
- * @param r		the row coordinate of the piece
- * @param m		the movelist from caller
+ * @param c - the columnar coordinate of the piece
+ * @param r - the row coordinate of the piece
+ * @param m - the movelist from caller
  */
 void Board::showMoves(unsigned int c, unsigned int r, std::vector<Move> m) {
 	std::stringstream sb;

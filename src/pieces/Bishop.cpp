@@ -4,14 +4,14 @@
 
 /**
  * Bishop constructor
- * @param c		the color of the piece
+ * @param c - the color of the piece
  */
 Bishop::Bishop(bool c)
 	: Piece(c, GameParams::B_VAL, 'B') {} // chain into base constructor
 
 /**
  * explicit copy constructor
- * @return		a copy of this object
+ * @return - a copy of this object
  */
 std::shared_ptr<Piece> Bishop::clone() const {
 	return std::shared_ptr<Piece>(new Bishop(*this));
@@ -20,10 +20,10 @@ std::shared_ptr<Piece> Bishop::clone() const {
 /**
  * method to determine which moves this piece may make, creates a collection of
  * valid moves the piece can make
- * @param b		the board the piece is on
- * @param c		the columnar coordinate of the piece
- * @param r		the row coordinate of the piece
- * @return		a collection of moves this piece may make
+ * @param b - the board the piece is on
+ * @param c - the columnar coordinate of the piece
+ * @param r - the row coordinate of the piece
+ * @return - a collection of moves this piece may make
  */
 std::vector<Move> Bishop::getMoves(Board* b, unsigned int c, unsigned int r) {
 	std::vector<Move> moveList;

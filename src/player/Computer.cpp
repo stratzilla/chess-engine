@@ -4,8 +4,8 @@
 
 /**
  * Computer class constructor
- * @param c		color of this player
- * @param d		the depth for AI tree search
+ * @param c - color of this player
+ * @param d - the depth for AI tree search
  */
 Computer::Computer(bool c, unsigned int d) {
 	setColor(c);
@@ -14,7 +14,7 @@ Computer::Computer(bool c, unsigned int d) {
 
 /**
  * method to prompt user for their move
- * @return		the move they've chosen
+ * @return - the move they've chosen
  */
 Move Computer::promptMove() {
 	return negamaxHandler(INT_MIN, INT_MAX);
@@ -23,9 +23,9 @@ Move Computer::promptMove() {
 /**
  * negamax handler, performs the first level of negamax and compares the values
  * of further calls to generate the best move as dictated by the AI
- * @param alf	alpha
- * @param bet	beta
- * @return		optimal AI move
+ * @param alf - alpha
+ * @param bet - beta
+ * @return - optimal AI move
  */
 Move Computer::negamaxHandler(int alf, int bet) {
 	// get all moves AI can make
@@ -116,12 +116,12 @@ Move Computer::negamaxHandler(int alf, int bet) {
  * recursively but without the typical two function calls that minimax uses
  * negamax relies on the property of max(alf, bet) == -min(-alf, -bet) which is
  * equivalent or better than vanilla minimax
- * @param b		the board to checkmate
- * @param d		the depth to use to break out of algorithm
- * @param alf	alpha
- * @param bet	beta
- * @param p		the calling player
- * @return		best evaluation for AI
+ * @param b	- the board to checkmate
+ * @param d	- the depth to use to break out of algorithm
+ * @param alf - alpha
+ * @param bet - beta
+ * @param p - the calling player
+ * @return - best evaluation for AI
  */
 int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 	evalCount++; // increment count to display positions evaluated
@@ -155,8 +155,8 @@ int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 
 /**
  * method to evaluate a board's worth
- * @param b		the board to evaluate
- * @return		total board value according to AI
+ * @param b - the board to evaluate
+ * @return - total board value according to AI
  */
 int Computer::evalBoard(Board* b) {
 	/**
@@ -182,8 +182,8 @@ int Computer::evalBoard(Board* b) {
 /**
  * method to let console know number of game states evaluated as well as the 
  * score the AI gave the board
- * @param s		the score
- * @param e		how many equivalent moves found
+ * @param s - the score
+ * @param e - how many equivalent moves found
  */
 inline void Computer::printData(int s, unsigned int e) {
 	std::cout << "\n" << evalCount << " game state(s) evaluated; ";

@@ -4,7 +4,7 @@
 
 /**
  * method to remove moves which would put player in check
- * @param m		movelist to remove moves from
+ * @param m - movelist to remove moves from
  */
 void Player::removeCheckedMoves(std::vector<Move> &m) {
 	std::vector<int> indexes;

@@ -4,14 +4,14 @@
 
 /**
  * King constructor
- * @param c		the color of the piece
+ * @param c - the color of the piece
  */
 King::King(bool c)
 	: Piece(c, GameParams::K_VAL, 'K') {} // chain into base constructor
 
 /**
  * explicit copy constructor
- * @return		a copy of this object
+ * @return - a copy of this object
  */
 std::shared_ptr<Piece> King::clone() const {
 	return std::shared_ptr<Piece>(new King(*this));
@@ -20,10 +20,10 @@ std::shared_ptr<Piece> King::clone() const {
 /**
  * method to determine which moves this piece may make, creates a collection of 
  * valid moves the piece can make
- * @param b		the board the piece is on
- * @param c		the columnar coordinate of the piece
- * @param r		the row coordinate of the piece
- * @return		a collection of moves this piece may make
+ * @param b - the board the piece is on
+ * @param c - the columnar coordinate of the piece
+ * @param r - the row coordinate of the piece
+ * @return - a collection of moves this piece may make
  */
 std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 	std::vector<Move> moveList;
@@ -99,8 +99,8 @@ std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 
 /**
  * method to remove moves which put king next to king
- * @param b		the board the king is on
- * @param m		movelist to remove from
+ * @param b - the board the king is on
+ * @param m - movelist to remove from
  */
 inline void King::removeSurroundingKings(Board* b, std::vector<Move> &m) {
 	std::vector<int> indexes;
@@ -137,8 +137,8 @@ inline void King::removeSurroundingKings(Board* b, std::vector<Move> &m) {
 
 /**
  * method to remove moves which would put king in check
- * @param b		the board the king is on
- * @param m		movelist to remove moves from
+ * @param b - the board the king is on
+ * @param m - movelist to remove moves from
  */
 inline void King::removeCheckedMoves(Board* b, std::vector<Move> &m) {
 	std::vector<int> indexes;

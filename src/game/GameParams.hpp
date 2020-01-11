@@ -45,7 +45,8 @@ namespace GameParams {
 	 * board evaluation. The highest material score for one player is 103, 
 	 * mobility score is 215 and pawn control 48. Multiply these by the 
 	 * coefficients and add one to ensure the evaluation is always highest for 
-	 * checkmate
+	 * checkmate. It is multiplied by the value for check as check is equal to
+	 * double any given board evaluation
 	 */
 	const static int CHECKMATE = (CHECK * ((C1*103) + (C2*215) + (C3*48))) + 1;
 	
