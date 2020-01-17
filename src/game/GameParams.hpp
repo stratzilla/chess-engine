@@ -1,8 +1,6 @@
 #pragma once
 
-/**
- * various game parameters
- */
+// various game parameters
 
 namespace GameParams {
 	/**
