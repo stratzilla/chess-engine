@@ -79,41 +79,15 @@ Any heuristic which has some consideration for material value will generally out
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%2C%20c_2%2C%20c_3%20%5Cin%20%5Cleft%5B1%2C%5Cinfty%5Cright%29" />
 <img src="https://latex.codecogs.com/png.latex?%5Clarge%20c_1%20%5Cgg%20c_3%20%3E%20c_2" />
 
-That is, <img src="https://latex.codecogs.com/png.latex?c_1" /> should be the largest coefficient by some bigger degree than <img src="https://latex.codecogs.com/png.latex?c_3" /> is to <img src="https://latex.codecogs.com/png.latex?c_2" />. The equation is reducible as it represents the ratio of what the AI deems important. For example:
+That is, <img src="https://latex.codecogs.com/png.latex?c_1" /> should be the largest coefficient by some bigger degree than <img src="https://latex.codecogs.com/png.latex?c_3" /> is to <img src="https://latex.codecogs.com/png.latex?c_2" />.
 
-<img src="https://latex.codecogs.com/png.latex?c_1%3Ac_2%3Ac_3%20%3D%205%3A5%3A5%20%5Cequiv%201%3A1%3A1" />
-<img src="https://latex.codecogs.com/png.latex?c_1%3Ac_2%3Ac_3%20%3D%204%3A2%3A2%20%5Cequiv%202%3A1%3A1" />
-<img src="https://latex.codecogs.com/png.latex?c_1%3Ac_2%3Ac_3%20%3D%2015%3A3%3A6%20%5Cequiv%205%3A1%3A2" />
-<img src="https://latex.codecogs.com/png.latex?c_1%3Ac_2%3Ac_3%20%3D%2018%3A27%3A36%20%5Cequiv%202%3A3%3A4" />
-
-And so on. Any coefficient choice where there is a common factor between them has an impact equivalent to the reduced form of the heuristic equation. In other words, since the heuristic is a balance between values, an equal ratio between values, irrespective of the ratio, has identical heuristic performance. Consider reducing the coefficients as much as possible or some undefined behavior may arise (for example, so the heuristic score doesn't exceed `INT_MAX`).
+Other game states are also evaluated: a stalemate/draw has a zero evaluation (as it is neither beneficial nor detrimental to the player), check is double the current board evaluation, and checkmate is double the highest possible board evaluation, plus one. This ensures a checkmate is not arbitrary and instead is the smallest value which is assured to be better than any (legal) board configuration, including board states in check.
 
 Refer to `game/GameParams.hpp` for chess parameters including coefficients for heuristic evaluation.
 
 # NegaMax/MiniMax Tree Search with Alpha-Beta Pruning
 
-The chess engine uses a simple tree search using NegaMax (a variant of MiniMax) with alpha-beta pruning implemented. Recall MiniMax as below:
-
-```
-function minimax(node, depth, α, β, player):
-  if depth = 0:
-    return eval(node)
-  if player = minimizingplayer:
-    v := -inf
-    foreach branch of node:
-      v := max(v, minimax(branch, depth-1, α, β, minimizingplayer)
-      α := max(α, v)
-      if α >= β: break
-  if player = minimizingplayer:
-    v := +inf
-    foreach branch of node:
-      v := min(v, minimax(branch, depth-1, α, β, maximizingplayer)
-      β := min(β, v)
-      if α >= β: break
-  return v
-```
-
-NegaMax relies on the mathematical maxim <img src="https://latex.codecogs.com/png.latex?Max%28a%2C%20b%29%20%3D%20-Min%28-a%2C%20-b%29" /> to optimize the algorithm to roughly half the lines of MiniMax while maintaining identical performance and result:
+The chess engine uses a simple tree search using NegaMax (a variant of MiniMax) with alpha-beta pruning implemented. NegaMax relies on the mathematical maxim <img src="https://latex.codecogs.com/png.latex?Max%28a%2C%20b%29%20%3D%20-Min%28-a%2C%20-b%29" /> to shorten the MiniMax algorithm to roughly half the lines of MiniMax while maintaining identical performance:
 
 ```
 function negamax(node, depth, α, β, player):
@@ -127,13 +101,11 @@ function negamax(node, depth, α, β, player):
   return v
 ```
 
-Some minor alterations to fit a chess engine are added to this, for example considering moves which bring the AI or the player into check, stalemate, or checkmate, etc.
+`negamax` is called by a broader `negamaxHandler` which performs the first level of NegaMax manually so it can investigate the score of first moves (and their effect on the board) and then return an ideal move. In practice, the tree structure of the game is less like a typical tree and rather multiple trees: each first move is a root node in its own tree. This means first moves can be evaluated and compared.
 
-`negamax` is called by a broader `negamaxHandler` which performs the first level of NegaMax manually so it can investigate the score of first moves (and their effect on the board) and then return an ideal move. In practice, the tree structure of the game is less like a typical tree and rather multiple trees: each first move is a root node in its own tree. This means first moves can be evaluated and compared. This lends itself well to parallelization which I may implement in the future, potentially making the tree search 35x faster at best cases.
+# AI Forfeiture
 
-# Pruning beyond Alpha-Beta
-
-Besides alpha-beta pruning, the tree search is otherwise exhaustive but it doesn't need to be. Consider a branch node where the current board state is checkmate: this is a terminal case and there should be no future moves in branch nodes. The search algorithm evaluates branch nodes like this as a fixed value rather than recursing further to see more moves. Secondly, threefold repetition needs to be addressed with a move buffer: if the AI sees a branch node of a move which it has made within the last three moves, it needs to ignore this. Not only to prevent move reduplication but also to prune those branches. AI forfeiture is a possibility in the late game as it runs out of viable moves when considering the buffer.
+To prevent threefold repetition, a move buffer is implemented for the AI. The AI is unable to make moves which it has previously made in the last three moves (by default). This eliminates infinite move repetition, at least within the scope of the buffer size. However, were a move reduplication be the only valid move, the AI will instead forfeit. This prevents overly lengthy games full of move repetitions which can become evident in the late game.
 
 # Performance
 
