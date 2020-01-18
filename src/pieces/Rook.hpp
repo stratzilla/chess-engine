@@ -13,9 +13,9 @@ class Rook : public Piece {
 		// the furthest it may move
 		const static unsigned int MAX_MOVE = 8;
 	public:
-		Rook(bool); // constructor		
+		Rook(bool); // constructor
 		std::shared_ptr<Piece> clone() const; // copy constructor
-		
+
 		// member methods
 		std::vector<Move> getMoves(Board*, unsigned int, unsigned int);
 };

@@ -15,9 +15,9 @@ class Pawn : public Piece {
 		// for offsets
 		const static bool WHITE = true, BLACK = false;
 	public:
-		Pawn(bool); // constructor		
+		Pawn(bool); // constructor
 		std::shared_ptr<Piece> clone() const; // copy constructor
-		
+
 		// member methods
 		std::vector<Move> getMoves(Board*, unsigned int, unsigned int);
 };

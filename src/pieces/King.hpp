@@ -14,14 +14,14 @@ class King : public Piece {
 		const static unsigned int MAX_MOVE = 1;
 		// for castling moves
 		const static unsigned int CASTLE_MOVE = 2;
-		
+
 		// private member methods
 		void removeSurroundingKings(Board*, std::vector<Move>&);
 		void removeCheckedMoves(Board*, std::vector<Move>&);
 	public:
 		King(bool); // constructor
 		std::shared_ptr<Piece> clone() const; // copy constructor
-		
+
 		// public member methods
 		std::vector<Move> getMoves(Board*, unsigned int, unsigned int);
 };

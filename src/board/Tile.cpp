@@ -6,7 +6,7 @@
 Tile::Tile() : occupant(NULL) {}
 Tile::Tile(Piece* p) : occupant(p) {}
 Tile::~Tile() { occupant.reset(); }
-Tile::Tile(const Tile& t) 
+Tile::Tile(const Tile& t)
 	: occupant(t ? t.occupant->clone() : std::shared_ptr<Piece>()) {}
 
 // explicit "destructor"

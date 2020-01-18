@@ -13,9 +13,9 @@ class Queen : public Piece {
 		// the furthest it may move
 		const static unsigned int MAX_MOVE = 8;
 	public:
-		Queen(bool); // constructor		
+		Queen(bool); // constructor
 		std::shared_ptr<Piece> clone() const; // copy constructor
-		
+
 		// member methods
 		std::vector<Move> getMoves(Board*, unsigned int, unsigned int);
 };

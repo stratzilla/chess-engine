@@ -15,7 +15,7 @@ class Knight : public Piece {
 	public:
 		Knight(bool); // constructor
 		std::shared_ptr<Piece> clone() const; // copy constructor
-		
+
 		// member methods
 		std::vector<Move> getMoves(Board*, unsigned int, unsigned int);
 };

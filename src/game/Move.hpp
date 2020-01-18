@@ -11,16 +11,16 @@ class Move {
 		Move(); // default constructor
 		// parameterized constructor
 		Move(unsigned int, unsigned int, unsigned int, unsigned int);
-		
+
 		// member methods
 		std::string stateMove();
-		
+
 		// accessor methods
 		unsigned int getOrigR();
 		unsigned int getOrigC();
 		unsigned int getDestR();
 		unsigned int getDestC();
-		
+
 		// operator methods
 		bool operator==(Move&);
 		bool operator>=(Move&);

@@ -9,7 +9,7 @@
  * @param black - the black player
  */
 Game::Game(Board* b, Player* white, Player* black)
-	: gameboard(b), playerA(white), playerB(black), gameState(0) { 
+	: gameboard(b), playerA(white), playerB(black), gameState(0) {
 	getPlayerWhite().setBoard(b); // allow visibility of board to white
 	getPlayerBlack().setBoard(b); // same for black
 }
@@ -21,7 +21,7 @@ void Game::play() {
 		getBoard()->printBoard(); // print current board
 		// check if checkmate, check, draw, or stalemate occurred
 		if (getBoard()->determineCheckmate(getPlayerWhite().getColor())) {
-			setGameState(3); break; 
+			setGameState(3); break;
 		}
 		if (getBoard()->determineDraw()) { setGameState(2); break; }
 		if (getBoard()->determineStalemate(getPlayerWhite().getColor())) {
@@ -33,7 +33,7 @@ void Game::play() {
 		whiteMove(); // otherwise make a move
 		// black move
 		getBoard()->printBoard();
-		if (getBoard()->determineCheckmate(getPlayerBlack().getColor())) { 
+		if (getBoard()->determineCheckmate(getPlayerBlack().getColor())) {
 			setGameState(4); break;
 		}
 		if (getBoard()->determineStalemate(getPlayerBlack().getColor())) {

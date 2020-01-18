@@ -12,13 +12,13 @@ class Tile {
 		Tile(Piece* p); // parameterized constructor
 		Tile(const Tile& t); // copy constructor
 		~Tile(); // destructor
-		
+
 		// member methods
 		void reset();
-		
+
 		// accessor methods
 		Piece& getPiece();
-		
+
 		// operator methods
 		Tile& operator=(const Tile&);
 		Tile& operator=(Piece*);

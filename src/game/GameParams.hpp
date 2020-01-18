@@ -12,14 +12,14 @@ namespace GameParams {
 	const static int C1 = 12; // for material value
 	const static int C2 = 1; // for mobility value
 	const static int C3 = 3; // for pawn rank value
-	
+
 	/**
 	 * move buffer for AI, prevents move reduplication within the last few
 	 * moves. This should be relatively small perhaps ideally in the single
 	 * digits. Much larger and the AI will tend to forfeit early
 	 */
 	const static unsigned int BUFFER_SIZE = 3;
-	
+
 	/**
 	 * piece values, generally keep this the way it is, there's no real need to
 	 * change them
@@ -30,7 +30,7 @@ namespace GameParams {
 	const static unsigned int R_VAL = 5; // for rooks
 	const static unsigned int Q_VAL = 9; // for queens
 	const static unsigned int K_VAL = 100; // for kings
-	
+
 	/**
 	 * game state values, generally keep this the way it is, there's no real
 	 * need to change them
@@ -39,15 +39,15 @@ namespace GameParams {
 	const static int DRAW = 0;
 	const static int CHECK = 2; // check is multiplicand
 	/**
-	 * concerning checkmate scoring, it needs to be greater than any possible 
-	 * board evaluation. The highest material score for one player is 103, 
-	 * mobility score is 215 and pawn control 48. Multiply these by the 
-	 * coefficients and add one to ensure the evaluation is always highest for 
+	 * concerning checkmate scoring, it needs to be greater than any possible
+	 * board evaluation. The highest material score for one player is 103,
+	 * mobility score is 215 and pawn control 48. Multiply these by the
+	 * coefficients and add one to ensure the evaluation is always highest for
 	 * checkmate. It is multiplied by the value for check as check is equal to
 	 * double any given board evaluation
 	 */
 	const static int CHECKMATE = (CHECK * ((C1*103) + (C2*215) + (C3*48))) + 1;
-	
+
 	/**
 	 * default values
 	 *

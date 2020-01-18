@@ -40,7 +40,7 @@ Move Computer::negamaxHandler(int alf, int bet) {
 		 * to avoid threefold repetition, we need to handle cases where a move
 		 * is repeated. Mostly evident in AI vs AI games where it will go on
 		 * forever as they move pieces back and forth ad infinitum. This
-		 * prevents reuse of the previous moves the amount of which is 
+		 * prevents reuse of the previous moves the amount of which is
 		 * determined by a buffer. Added benefits of less negamax calls meaning
 		 * faster speed
 		 */
@@ -68,7 +68,7 @@ Move Computer::negamaxHandler(int alf, int bet) {
 		// prune further moves
 		if (alf >= bet) { pruneCount++; break; }
 	}
-	/** 
+	/**
 	 * unable to catch instances where the movelist is zero leading to null
 	 * move, so consider this the AI forfeiting
 	 */
@@ -116,8 +116,8 @@ Move Computer::negamaxHandler(int alf, int bet) {
  * recursively but without the typical two function calls that minimax uses
  * negamax relies on the property of max(alf, bet) == -min(-alf, -bet) which is
  * equivalent or better than vanilla minimax
- * @param b - the board to checkmate
- * @param d - the depth to use to break out of algorithm
+ * @param b	- the board to checkmate
+ * @param d	- the depth to use to break out of algorithm
  * @param alf - alpha
  * @param bet - beta
  * @param p - the calling player
@@ -136,7 +136,7 @@ int Computer::negamax(Board* b, unsigned int d, int alf, int bet, bool p) {
 	if (b->determineDraw()) { return GameParams::DRAW; }
 	// putting another person in check is beneficial
 	if (b->determineCheck(p)) {
-		return (GameParams::CHECK * offset) * evalBoard(b); 
+		return (GameParams::CHECK * offset) * evalBoard(b);
 	}
 	int value = INT_MIN; // initially minimum (will overwrite)
 	std::vector<Move> moveList = b->getAllMoves(!p); // get moves of opponent
@@ -171,7 +171,7 @@ int Computer::evalBoard(Board* b) {
 	int mobility = b->getAllMobilityValues(getColor()); // board control
 	int pawns = b->getAllPawnValues(getColor()); // pawn control
 	/**
-	 * some coefficients to balance the weights of the various metrics about 
+	 * some coefficients to balance the weights of the various metrics about
 	 * the board
 	 */
 	int c1 = GameParams::C1, c2 = GameParams::C2, c3 = GameParams::C3;
@@ -180,7 +180,7 @@ int Computer::evalBoard(Board* b) {
 }
 
 /**
- * method to let console know number of game states evaluated as well as the 
+ * method to let console know number of game states evaluated as well as the
  * score the AI gave the board
  * @param s - the score
  * @param e - how many equivalent moves found

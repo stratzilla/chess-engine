@@ -14,7 +14,7 @@ class Human : public Player {
 		void quitGame();
 	public:
 		Human(bool); // constructor
-		
+
 		// public member methods
 		Move promptMove();
 };

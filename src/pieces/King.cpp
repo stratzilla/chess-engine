@@ -18,7 +18,7 @@ std::shared_ptr<Piece> King::clone() const {
 }
 
 /**
- * method to determine which moves this piece may make, creates a collection of 
+ * method to determine which moves this piece may make, creates a collection of
  * valid moves the piece can make
  * @param b - the board the piece is on
  * @param c - the columnar coordinate of the piece
@@ -55,7 +55,7 @@ std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 		}
 	}
 	/**
-	 * castling specific code separated as it  does not follow normal movement 
+	 * castling specific code separated as it does not follow normal movement
 	 * pattern
 	 */
 	bool checkWhitePos = (getColor() && c == 4 && r == 0); // valid W pos
@@ -64,7 +64,7 @@ std::vector<Move> King::getMoves(Board* b, unsigned int c, unsigned int r) {
 		for (unsigned int j = 0; j < CASTLE_MOVE; j++) {
 			/**
 			 * castling to the east requires a check of two positions between
-			 * king and rook, whereas castling to the west needs three position 
+			 * king and rook, whereas castling to the west needs three position
 			 * checks
 			 */
 			for (unsigned int i = 1; i < ((j == 0) ? 4 : 5); ++i) {

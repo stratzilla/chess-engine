@@ -36,8 +36,8 @@ Move Human::promptMove() {
 		// if don't own tile
 		if (!checkOwner(s[0]-97, s[1]-49)) { errorMessage(4); continue; }
 		// if command of size 2, show moves
-		if (s.size() == 2) { 
-			getBoard()->showMoves(s[0]-97, s[1]-49, moveList); continue; 
+		if (s.size() == 2) {
+			getBoard()->showMoves(s[0]-97, s[1]-49, moveList); continue;
 		}
 		// verify move is legal
 		Move m(s[0]-97, s[1]-49, s[2]-97, s[3]-49);

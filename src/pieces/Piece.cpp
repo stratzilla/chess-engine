@@ -25,7 +25,7 @@ Piece::~Piece() {}
  * @return - whether the move is within the board
  */
 bool Piece::checkInBounds(unsigned int c, unsigned int r) {
-	return (r < ROWS) && (c < COLS); 
+	return (r < ROWS) && (c < COLS);
 }
 
 // accessor methods
