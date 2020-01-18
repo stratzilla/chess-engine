@@ -85,7 +85,7 @@ Other game states are also evaluated: a stalemate/draw has a zero evaluation (as
 
 Refer to `game/GameParams.hpp` for chess parameters including coefficients for heuristic evaluation.
 
-# NegaMax/MiniMax Tree Search with Alpha-Beta Pruning
+# NegaMax Tree Search with Alpha-Beta Pruning
 
 The chess engine uses a simple tree search using NegaMax (a variant of MiniMax) with alpha-beta pruning implemented. NegaMax relies on the mathematical maxim <img src="https://latex.codecogs.com/png.latex?Max%28a%2C%20b%29%20%3D%20-Min%28-a%2C%20-b%29" /> to shorten the MiniMax algorithm to roughly half the lines of MiniMax while maintaining identical performance:
 
@@ -102,8 +102,6 @@ function negamax(node, depth, α, β, player):
 ```
 
 `negamax` is called by a broader `negamaxHandler` which performs the first level of NegaMax manually so it can investigate the score of first moves (and their effect on the board) and then return an ideal move. In practice, the tree structure of the game is less like a typical tree and rather multiple trees: each first move is a root node in its own tree. This means first moves can be evaluated and compared.
-
-# AI Forfeiture
 
 To prevent threefold repetition, a move buffer is implemented for the AI. The AI is unable to make moves which it has previously made in the last three moves (by default). This eliminates infinite move repetition, at least within the scope of the buffer size. However, were a move reduplication be the only valid move, the AI will instead forfeit. This prevents overly lengthy games full of move repetitions which can become evident in the late game.
 
