@@ -93,11 +93,11 @@ The chess engine uses a simple tree search using NegaMax (a variant of MiniMax) 
 function negamax(node, depth, α, β, player):
   if depth = 0:
     return player * eval(node)
-    v := -inf
-    foreach branch of node:
-      v := max(v, -negamax(branch, depth-1, -β, -α, -player))
-      α := max(α, v)
-      if α >= β: break
+  v := -inf
+  foreach branch of node:
+    v := max(v, -negamax(branch, depth-1, -β, -α, -player))
+    α := max(α, v)
+    if α >= β: break
   return v
 ```
 
