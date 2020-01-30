@@ -116,8 +116,8 @@ Move Computer::negamaxHandler(int alf, int bet) {
  * recursively but without the typical two function calls that minimax uses
  * negamax relies on the property of max(alf, bet) == -min(-alf, -bet) which is
  * equivalent or better than vanilla minimax
- * @param b	- the board to checkmate
- * @param d	- the depth to use to break out of algorithm
+ * @param b - the board to checkmate
+ * @param d - the depth to use to break out of algorithm
  * @param alf - alpha
  * @param bet - beta
  * @param p - the calling player
